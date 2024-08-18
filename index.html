@@ -18,6 +18,49 @@
         </nav>
     </header>
 
+    <div class="floating-logo"></div>
+    <div class="floating-logo"></div>
+    <div class="floating-logo"></div>
+
+
+    <script>
+        // Confetti effect on mouse click
+        document.addEventListener('click', function (event) {
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti-piece');
+                confetti.style.left = `${event.pageX}px`;
+                confetti.style.top = `${event.pageY}px`;
+    
+                // Random colors for confetti
+                const colors = ['#0f9d58', '#0c7e46', '#ffffff', '#ff4081'];
+                confetti.style.setProperty('--confetti-color', colors[Math.floor(Math.random() * colors.length)]);
+    
+                document.body.appendChild(confetti);
+    
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 2000);
+            }
+        });
+    
+        // Mouse hover trail effect
+        document.addEventListener('mousemove', function (event) {
+            const trailDot = document.createElement('div');
+            trailDot.classList.add('trail-dot');
+            trailDot.style.left = `${event.pageX}px`;
+            trailDot.style.top = `${event.pageY}px`;
+            document.body.appendChild(trailDot);
+    
+            // Remove trail dot after animation
+            setTimeout(() => {
+                trailDot.remove();
+            }, 600);
+        });
+    </script>
+    
+
     <section id="about">
         <h2>About Me</h2>
         <p>Meet Naitik Singhal, the tech maestro with a knack for turning code into comedy! Armed with a keyboard and a killer sense of humor, he's the wizard behind the screen, crafting lines of code and punchlines with equal finesse.</p>

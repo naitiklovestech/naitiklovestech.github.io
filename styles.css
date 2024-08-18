@@ -12,6 +12,8 @@ body {
     background-color: #121212; /* Dark Background */
     color: #e0e0e0; /* Light text color */
     min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    position: relative; /* Needed for absolute positioning of logos */
 }
 
 /* Full Screen Layout */
@@ -23,7 +25,7 @@ html, body {
 header {
     background-color: #1c1c1c; /* Dark background */
     color: #0f9d58; /* Android Green */
-    padding: 2rem 0; /* Increased padding for better spacing */
+    padding: 2rem 0;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     position: sticky;
@@ -85,6 +87,7 @@ section h2 {
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     position: relative;
     height: 300px; /* Makes the project cards square */
+    overflow: hidden; /* Ensures content stays within the card */
 }
 
 .project:hover {
@@ -191,6 +194,93 @@ footer .social-links a:hover {
         transform: translateY(0);
     }
 }
+
+/* Mouse Hover Trail Effect */
+.trail-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: #0f9d58;
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
+    z-index: 1000;
+    animation: trailFade 0.6s ease-out forwards;
+}
+
+@keyframes trailFade {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+/* Confetti Effect */
+.confetti-piece {
+    position: absolute;
+    width: 5px;
+    height: 10px;
+    background: var(--confetti-color);
+    animation: confetti-fall 2s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: rotate(0deg) translateY(-20px);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(360deg) translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Floating Logos */
+/* Floating Logos in Background */
+.floating-logo {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    opacity: 0.8;
+    pointer-events: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1; /* Ensure it stays in the background */
+    animation: float 10s ease-in-out infinite;
+}
+
+.floating-logo:nth-child(1) {
+    background-image: url('Images/Android.png');
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-logo:nth-child(2) {
+    background-image: url('Images/Kotlin.png');
+    top: 30%;
+    right: 10%;
+    animation-delay: 3s;
+}
+
+.floating-logo:nth-child(3) {
+    background-image: url('Images/ML.png');
+    bottom: 20%;
+    left: 50%;
+    animation-delay: 6s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-40px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 
 /* Media Queries */
 @media (max-width: 768px) {

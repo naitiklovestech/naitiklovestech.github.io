@@ -1,49 +1,83 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
 header {
-    background-color: #333;
+    background-color: #3ddc84; /* Android Green */
     color: white;
     padding: 1rem 0;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 nav ul li {
-    display: inline;
     margin: 0 15px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #2baf6b; /* Darker Android Green */
 }
 
 section {
     margin: 2rem auto;
-    max-width: 800px;
+    max-width: 900px;
     padding: 0 20px;
 }
 
 section h2 {
-    border-bottom: 2px solid #333;
+    border-bottom: 2px solid #3ddc84;
     padding-bottom: 0.5rem;
+    color: #3ddc84;
 }
 
 .project {
     background-color: white;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
     margin: 1rem 0;
     padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project h3 {
+    color: #3ddc84;
+}
+
+.project a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #3ddc84;
+    text-decoration: none;
+    border: 1px solid #3ddc84;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.project a:hover {
+    background-color: #3ddc84;
+    color: white;
 }
 
 footer {

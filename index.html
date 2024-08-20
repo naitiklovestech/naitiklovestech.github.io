@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Landing Page Section -->
+    <section id="landing">
+        <div class="container">
+            <div class="content">
+                <h1>Naitik Singhal's Portfolio!</h1>
+                <p>Android Developer | Machine Learning Enthusiast</p>
+                <br>
+                <br>
+                <a href="#about" class="cta-btn">Explore</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Portfolio Sections -->
     <header>
         <h1>Naitik Singhal</h1>
         <nav>
@@ -22,7 +36,6 @@
     <div class="floating-logo"></div>
     <div class="floating-logo"></div>
 
-
     <script>
         // Confetti effect on mouse click
         document.addEventListener('click', function (event) {
@@ -31,20 +44,20 @@
                 confetti.classList.add('confetti-piece');
                 confetti.style.left = `${event.pageX}px`;
                 confetti.style.top = `${event.pageY}px`;
-    
+
                 // Random colors for confetti
                 const colors = ['#0f9d58', '#0c7e46', '#ffffff', '#ff4081'];
                 confetti.style.setProperty('--confetti-color', colors[Math.floor(Math.random() * colors.length)]);
-    
+
                 document.body.appendChild(confetti);
-    
+
                 // Remove confetti after animation
                 setTimeout(() => {
                     confetti.remove();
                 }, 2000);
             }
         });
-    
+
         // Mouse hover trail effect
         document.addEventListener('mousemove', function (event) {
             const trailDot = document.createElement('div');
@@ -52,14 +65,13 @@
             trailDot.style.left = `${event.pageX}px`;
             trailDot.style.top = `${event.pageY}px`;
             document.body.appendChild(trailDot);
-    
+
             // Remove trail dot after animation
             setTimeout(() => {
                 trailDot.remove();
             }, 600);
         });
     </script>
-    
 
     <section id="about">
         <h2>About Me</h2>

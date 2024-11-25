@@ -3,364 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naitik's Portfolio</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: #E0E0E0;
-        }
-
-        header {
-            background-color: #1E1E1E;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #333;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        header h1 {
-            margin: 0;
-            color: #BB86FC;
-            font-weight: 500;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
-            color: #03DAC6;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        #landing {
-            background-color: #1E1E1E;
-            padding: 100px 20px;
-            text-align: center;
-        }
-
-        #landing h1 {
-            color: #BB86FC;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-
-        #landing p {
-            font-size: 1.2em;
-            color: #E0E0E0;
-        }
-
-        .cta-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #03DAC6;
-            color: #121212;
-            border: none;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-btn:hover {
-            background-color: #029a8c;
-        }
-
-        .floating-logo {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            opacity: 0.7;
-            transition: transform 0.2s ease;
-        }
-
-        .floating-logo.android {
-            top: 50px;
-            left: 20px;
-        }
-
-        .floating-logo.kotlin {
-            top: 50px;
-            right: 20px;
-        }
-
-        .floating-logo.ml {
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .floating-logo:hover {
-            transform: scale(1.2);
-        }
-
-        #about, #projects, #contact {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: auto;
-            background-color: #1E1E1E;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-        }
-
-        h2 {
-            color: #BB86FC;
-            font-weight: 400;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        p {
-            color: #E0E0E0;
-            line-height: 1.6;
-        }
-
-        .project {
-            background-color: #2A2A2A;
-            margin-bottom: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.8);
-        }
-
-        .project h3 {
-            color: #03DAC6;
-            font-weight: 400;
-        }
-
-        .project p {
-            margin: 5px 0;
-        }
-
-        .project a {
-            color: #BB86FC;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .project a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            background-color: #1E1E1E;
-            padding: 20px;
-            text-align: center;
-            border-top: 1px solid #333;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        footer p {
-            margin: 0;
-            color: #E0E0E0;
-        }
-
-        footer .social-links {
-            margin-top: 10px;
-        }
-
-        footer .social-links a {
-            margin: 0 10px;
-            color: #03DAC6;
-            text-decoration: none;
-        }
-
-        footer .social-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Confetti effect */
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: var(--confetti-color);
-            animation: fall 2s ease forwards;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
-
-        /* Trail effect */
-        .trail-dot {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #BB86FC;
-            border-radius: 50%;
-            animation: fadeOut 0.6s ease forwards;
-        }
-
-        @keyframes fadeOut {
-            to {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-        }
-    </style>
+    <title>Naitik Singhal's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Landing Page Section -->
-    <section id="landing">
-        <div class="container">
-            <div class="content">
-                <h1>Naitik Singhal's Portfolio!</h1>
-                <p>Android Developer | Machine Learning Enthusiast</p>
-                <a href="#about" class="cta-btn">Explore</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Portfolio Sections -->
     <header>
-        <h1>Naitik Singhal</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1 class="logo">Naitik Singhal</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Floating Logos -->
-    <div class="floating-logo android"></div>
-    <div class="floating-logo kotlin"></div>
-    <div class="floating-logo ml"></div>
-
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Meet Naitik Singhal, the tech maestro with a knack for turning code into comedy! Armed with a keyboard and a killer sense of humor, he's the wizard behind the screen, crafting lines of code and punchlines with equal finesse.</p>
-        <p>In the labyrinth of algorithms, Naitik pirouettes through ones and zeros with the agility of a caffeinated cat on a hot tin roof. His mornings start with debugging and coffee, although he argues that coffee is the real debugging fluid for programmers.</p>
+    <section id="landing">
+        <div class="content">
+            <h1>Welcome to My Portfolio</h1>
+            <p>Android Developer | Machine Learning Enthusiast</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
     </section>
 
-    <section id="projects">
-        <h2>Projects</h2>
-
-        <div class="project">
-            <div class="project-details">
-                <h3>Plant Disease Detection Model</h3>
-                <p><strong>Role:</strong> Machine Learning Engineer</p>
-                <p><strong>Technologies Used:</strong> Python, TensorFlow, CNN</p>
-                <p><strong>Description:</strong> An ML model to detect diseases in plants, helping hobbyists and botanists identify plant diseases for effective treatment.</p>
-                <p>
-                    <a href="https://github.com/naitiklovestech/plant-disease-detection">GitHub Link</a> | 
-                    <a href="https://devfolio.co/projects/plant-disease-detection">Devfolio Link</a> | 
-                    <a href="#">Deployed Link</a>
-                </p>
-            </div>
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>Hi! I'm Naitik Singhal, a passionate Android Developer and Machine Learning enthusiast. I love turning complex problems into simple, beautiful, and intuitive designs.</p>
+            <p>With a strong background in technology and an eye for detail, I craft software solutions that not only work seamlessly but also bring joy to users.</p>
         </div>
+    </section>
 
-        <div class="project">
-            <div class="project-details">
-                <h3>Notes Management App</h3>
-                <p><strong>Role:</strong> Android Developer</p>
-                <p><strong>Technologies Used:</strong> Kotlin, Firebase, Android</p>
-                <p><strong>Description:</strong> A local notes management app providing privacy and security, with data stored locally instead of the cloud.</p>
-                <p>
-                    <a href="https://github.com/naitiklovestech/notes-management-system">GitHub Link</a> | 
-                    <a href="https://devfolio.co/projects/notes-management-system">Devfolio Link</a> | 
-                    <a href="#">Deployed Link</a>
-                </p>
-            </div>
-        </div>
-
-        <div class="project">
-            <div class="project-details">
-                <h3>PingMeSafe App</h3>
-                <p><strong>Role:</strong> Android Developer</p>
-                <p><strong>Technologies Used:</strong> Kotlin, Google Maps API, Firebase</p>
-                <p><strong>Description:</strong> A disaster management app providing real-time safety information during natural calamities.</p>
-                <p>
-                    <a href="https://github.com/naitiklovestech/PingMeSafe">GitHub Link</a> | 
-                    <a href="https://devfolio.co/projects/pingmesafe">Devfolio Link</a> | 
-                    <a href="#">Deployed Link</a>
-                </p>
+    <section id="projects" class="section">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="project-list">
+                <div class="project-card">
+                    <h3>Plant Disease Detection</h3>
+                    <p>An ML model to detect diseases in plants, helping hobbyists and botanists.</p>
+                    <a href="https://github.com/naitiklovestech/plant-disease-detection" class="btn">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Notes Management App</h3>
+                    <p>A local notes management app ensuring privacy by storing data locally.</p>
+                    <a href="https://github.com/naitiklovestech/notes-management-system" class="btn">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>PingMeSafe App</h3>
+                    <p>A disaster management app providing real-time safety information.</p>
+                    <a href="https://github.com/naitiklovestech/PingMeSafe" class="btn">View Project</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:singhalnaitik22@gmail.com">singhalnaitik22@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/naitiklovestech">Naitik Singhal</a></p>
-        <p>Twitter: <a href="https://twitter.com/Naitiklovestech">Naitik Singhal</a></p>
-        <p>Instagram: <a href="https://www.instagram.com/naitiklovestech/">Naitik Singhal</a></p>
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <p>Email: <a href="mailto:singhalnaitik22@gmail.com">singhalnaitik22@gmail.com</a></p>
+            <p>LinkedIn: <a href="https://linkedin.com/in/naitiklovestech">Naitik Singhal</a></p>
+            <p>Twitter: <a href="https://twitter.com/Naitiklovestech">Naitik Singhal</a></p>
+        </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Naitik Singhal. All rights reserved.</p>
-        <div class="social-links">
-            <a href="https://linkedin.com/in/naitiklovestech">LinkedIn</a>
-            <a href="https://twitter.com/Naitiklovestech">Twitter</a>
-            <a href="https://github.com/naitiklovestech">GitHub</a>
-            <a href="https://www.instagram.com/naitiklovestech/">Instagram</a>
+        <div class="container">
+            <p>&copy; 2024 Naitik Singhal. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        // Confetti effect on mouse click
-        document.addEventListener('click', function (event) {
-            for (let i = 0; i < 20; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti-piece');
-                confetti.style.left = `${event.pageX}px`;
-                confetti.style.top = `${event.pageY}px`;
-
-                // Random colors for confetti
-                const colors = ['#0f9d58', '#0c7e46', '#ffffff', '#ff4081'];
-                confetti.style.setProperty('--confetti-color', colors[Math.floor(Math.random() * colors.length)]);
-
-                document.body.appendChild(confetti);
-
-                // Remove confetti after animation
-                setTimeout(() => {
-                    confetti.remove();
-                }, 2000);
-            }
-        });
-
-        // Mouse hover trail effect
-        document.addEventListener('mousemove', function (event) {
-            const trailDot = document.createElement('div');
-            trailDot.classList.add('trail-dot');
-            trailDot.style.left = `${event.pageX}px`;
-            trailDot.style.top = `${event.pageY}px`;
-            document.body.appendChild(trailDot);
-
-            // Remove trail dot after animation
-            setTimeout(() => {
-                trailDot.remove();
-            }, 600);
-        });
-    </script>
 </body>
 </html>

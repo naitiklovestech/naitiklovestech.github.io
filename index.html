@@ -1,78 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naitik Singhal's Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naitik Singhal's Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Landing section with parallax */
+    #landing {
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+      padding: 140px 20px;
+      text-align: center;
+      overflow: hidden;
+      perspective: 800px;
+    }
+    #landing h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #FFB300;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+    }
+    #landing p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      color: #f5f5f5;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+    }
+
+    /* Animated line divider */
+    .divider {
+      width: 150px;
+      height: 3px;
+      background: #FFB300;
+      margin: 30px auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .divider::after {
+      content: '';
+      position: absolute;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background: #fff;
+      animation: moveDivider 1.5s infinite linear;
+    }
+    @keyframes moveDivider {
+      0% { left: -50%; }
+      100% { left: 100%; }
+    }
+
+    /* Section fade/slide animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 3D parallax effect JS applied class */
+    .parallax {
+      will-change: transform;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1 class="logo">Naitik Singhal</h1>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <section id="landing">
-        <div class="content">
-            <h1>Welcome to My Portfolio</h1>
-            <p>Android Developer | Machine Learning Enthusiast</p>
-            <a href="#about" class="btn">Learn More</a>
-        </div>
-    </section>
+<header>
+  <div class="container">
+    <h1 class="logo">Naitik Singhal</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-    <section id="about" class="section">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>Hi! I'm Naitik Singhal, a passionate Android Developer and Machine Learning enthusiast. I love turning complex problems into simple, beautiful, and intuitive designs.</p>
-            <p>With a strong background in technology and an eye for detail, I craft software solutions that not only work seamlessly but also bring joy to users.</p>
-        </div>
-    </section>
+<section id="landing">
+  <h1 class="parallax" id="heroText">Hello, I'm Naitik</h1>
+  <p class="parallax" id="heroSub">Android Developer | Machine Learning Enthusiast</p>
+  <a href="about.html" class="btn">Learn More</a>
+</section>
 
-    <section id="projects" class="section">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="project-list">
-                <div class="project-card">
-                    <h3>Plant Disease Detection</h3>
-                    <p>An ML model to detect diseases in plants, helping hobbyists and botanists.</p>
-                    <a href="https://github.com/naitiklovestech/plant-disease-detection" class="btn">View Project</a>
-                </div>
-                <div class="project-card">
-                    <h3>Notes Management App</h3>
-                    <p>A local notes management app ensuring privacy by storing data locally.</p>
-                    <a href="https://github.com/naitiklovestech/notes-management-system" class="btn">View Project</a>
-                </div>
-                <div class="project-card">
-                    <h3>PingMeSafe App</h3>
-                    <p>A disaster management app providing real-time safety information.</p>
-                    <a href="https://github.com/naitiklovestech/PingMeSafe" class="btn">View Project</a>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="divider"></div>
 
-    <section id="contact" class="section">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <p>Email: <a href="mailto:singhalnaitik22@gmail.com">singhalnaitik22@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://linkedin.com/in/naitiklovestech">Naitik Singhal</a></p>
-            <p>Twitter: <a href="https://twitter.com/Naitiklovestech">Naitik Singhal</a></p>
-        </div>
-    </section>
+<section id="projects" class="section fade-up">
+  <div class="container">
+    <h2>Featured Projects</h2>
+    <div class="project-list">
+      <div class="project-card">
+        <h3>Plant Disease Detection</h3>
+        <p>An ML model to detect diseases in plants and help enthusiasts.</p>
+        <a href="https://github.com/naitiklovestech/plant-disease-detection" class="btn" target="_blank">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Notes Management App</h3>
+        <p>A secure local notes app focusing on privacy and simplicity.</p>
+        <a href="https://github.com/naitiklovestech/notes-management-system" class="btn" target="_blank">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>PingMeSafe App</h3>
+        <p>A disaster management tool providing live safety information.</p>
+        <a href="https://github.com/naitiklovestech/PingMeSafe" class="btn" target="_blank">View Project</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Naitik Singhal. All rights reserved.</p>
-        </div>
-    </footer>
+<div class="divider"></div>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2024 Naitik Singhal. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll-triggered animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-up').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Simple 3D parallax effect on hero section
+  document.addEventListener('mousemove', e => {
+    const moveX = (window.innerWidth / 2 - e.pageX) / 50;
+    const moveY = (window.innerHeight / 2 - e.pageY) / 50;
+    document.getElementById('heroText').style.transform = `rotateY(${moveX}deg) rotateX(${moveY}deg)`;
+    document.getElementById('heroSub').style.transform = `rotateY(${moveX}deg) rotateX(${moveY}deg)`;
+  });
+</script>
+
 </body>
 </html>

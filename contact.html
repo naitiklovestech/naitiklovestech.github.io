@@ -3,8 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact</title>
+  <title>Contact Me</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Hero section */
+    #contact-landing {
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+      padding: 140px 20px;
+      text-align: center;
+      overflow: hidden;
+      perspective: 800px;
+    }
+    #contact-landing h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      color: #FFB300;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+    }
+    #contact-landing p {
+      font-size: 1.4rem;
+      margin-bottom: 30px;
+      color: #f5f5f5;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+    }
+
+    /* Divider */
+    .divider {
+      width: 150px;
+      height: 3px;
+      background: #FFB300;
+      margin: 30px auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .divider::after {
+      content: '';
+      position: absolute;
+      left: -50%;
+      width: 50%;
+      height: 100%;
+      background: #fff;
+      animation: moveDivider 1.5s infinite linear;
+    }
+    @keyframes moveDivider {
+      0% { left: -50%; }
+      100% { left: 100%; }
+    }
+
+    /* Fade-up animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Contact cards */
+    .contact-card {
+      background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      border: 1px solid #333;
+      transition: 0.4s;
+      box-shadow: 0 0 15px rgba(255,179,0,0.15);
+      text-align: center;
+    }
+    .contact-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 25px rgba(255,179,0,0.4);
+    }
+    .contact-card p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+    .contact-card a {
+      color: #FFB300;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
@@ -15,35 +104,76 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<section id="contact" class="section">
+<section id="contact-landing">
+  <h1 class="parallax" id="contactText">Contact Me</h1>
+  <p class="parallax" id="contactSub">Let's connect and collaborate!</p>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact" class="section fade-up">
   <div class="container">
-    <h2>Contact Me</h2>
-    <div class="contact-method">
-      <p><strong>Email:</strong> <a href="mailto:singhalnaitik22@gmail.com">singhalnaitik22@gmail.com</a></p>
+
+    <div class="contact-card">
+      <p><strong>Email:</strong></p>
+      <a href="mailto:singhalnaitik22@gmail.com">singhalnaitik22@gmail.com</a>
     </div>
-    <div class="contact-method">
-      <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/naitiklovestech" target="_blank">Naitik Singhal</a></p>
+
+    <div class="contact-card">
+      <p><strong>LinkedIn:</strong></p>
+      <a href="https://linkedin.com/in/naitiklovestech" target="_blank">linkedin.com/in/naitiklovestech</a>
     </div>
-    <div class="contact-method">
-      <p><strong>Twitter:</strong> <a href="https://twitter.com/Naitiklovestech" target="_blank">Naitik Singhal</a></p>
+
+    <div class="contact-card">
+      <p><strong>Twitter:</strong></p>
+      <a href="https://twitter.com/Naitiklovestech" target="_blank">@Naitiklovestech</a>
     </div>
-    <div class="contact-method">
-      <p><strong>Instagram:</strong> <a href="https://www.instagram.com/naitiklovestech/" target="_blank">Naitik Singhal</a></p>
+
+    <div class="contact-card">
+      <p><strong>Instagram:</strong></p>
+      <a href="https://www.instagram.com/naitiklovestech/" target="_blank">@naitiklovestech</a>
     </div>
+
   </div>
 </section>
+
+<div class="divider"></div>
 
 <footer>
   <div class="container">
     <p>&copy; 2024 Naitik Singhal. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  // Scroll-triggered animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-up').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Parallax hero text
+  document.addEventListener('mousemove', e => {
+    const moveX = (window.innerWidth / 2 - e.pageX) / 50;
+    const moveY = (window.innerHeight / 2 - e.pageY) / 50;
+    document.getElementById('contactText').style.transform = `rotateY(${moveX}deg) rotateX(${moveY}deg)`;
+    document.getElementById('contactSub').style.transform = `rotateY(${moveX}deg) rotateX(${moveY}deg)`;
+  });
+</script>
 
 </body>
 </html>

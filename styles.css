@@ -115,28 +115,60 @@
   }
   
   .project-card {
-    background: #111;
-    padding: 25px;
-    border-radius: 10px;
-    width: 300px;
-    border: 1px solid #333;
-    transition: 0.3s;
+    background: rgba(20, 20, 20, 0.85);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 35px;
+    border: 1px solid rgba(255, 179, 0, 0.3);
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    text-align: left;
   }
   
   .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(255, 179, 0, 0.3);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 0 35px rgba(255, 179, 0, 0.5);
+    border-color: #FFB300;
   }
   
   .project-card h3 {
     color: #FFB300;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
   }
   
   .project-card p {
-    margin-bottom: 15px;
-    color: #ccc;
+    font-size: 1.1rem;
+    color: #ddd;
+    margin-bottom: 12px;
+    line-height: 1.6;
   }
+  
+  .project-card strong {
+    color: #FFB300;
+    font-weight: 600;
+  }
+  
+  .project-card a {
+    display: inline-block;
+    background: #FFB300;
+    color: #000;
+    padding: 10px 20px;
+    margin: 5px 5px 0 0;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    font-size: 0.95rem;
+  }
+  
+  .project-card a:hover {
+    background: #e09c00;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  
   
   /* Contact / About Cards */
   .contact-method, .about-container {

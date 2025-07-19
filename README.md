@@ -15,6 +15,7 @@ Welcome to the source code of my personal portfolio — a modern, fully responsi
 ## 👨‍💻 About Me
 
 Hi, I’m **Naitik Singhal** — a Core Java and Spring Boot developer with a passion for scalable architectures, clean code, and backend-first thinking.  
+
 This portfolio site is a concise representation of my backend expertise, project deployments, and contact gateways for client and team collaborations.
 
 ---

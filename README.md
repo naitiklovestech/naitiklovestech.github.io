@@ -1,8 +1,8 @@
-# 🌐 Naitik Singhal — Backend Developer Portfolio Website
+# 🌐 Naitik Singhal — Java & Android Developer Portfolio
 
-Welcome to the source code of my personal portfolio — a modern, fully responsive, and animation-enriched website designed to represent my backend development skills, project work, and technical profile.
+Welcome to my redesigned personal portfolio — a modern, fully responsive single-page website showcasing my expertise in Java backend development, Spring Boot microservices, and native Android applications.
 
-> “Solid backend systems don't just run — they scale, perform, and empower.” — A Backend Architect ⚙️
+> "Building robust backend systems and intuitive mobile experiences that scale with your business." — Naitik Singhal ⚙️📱
 
 ---
 
@@ -14,95 +14,132 @@ Welcome to the source code of my personal portfolio — a modern, fully responsi
 
 ## 👨‍💻 About Me
 
-Hi, I’m **Naitik Singhal** — a Core Java and Spring Boot developer with a passion for scalable architectures, clean code, and backend-first thinking.  
+Hi, I'm **Naitik Singhal** — a passionate Java and Android developer with expertise in building scalable backend architectures and native mobile applications. I specialize in Core Java, Spring Boot, RESTful APIs, and Android development using Kotlin.
 
-This portfolio site is a concise representation of my backend expertise, project deployments, and contact gateways for client and team collaborations.
+This portfolio represents my journey in creating robust backend systems, microservices, and mobile applications that solve real-world problems.
 
 ---
 
 ## 🎯 Features
 
-- ⚙️ **Java backend-focused branding & content**
-- ✨ **Minimal, modern UI/UX** with dark theme styling
-- 🌍 **Responsive design** suitable for desktop and mobile
-- 🔄 **Scroll-triggered animations** and smooth transitions
-- 📦 **Project cards** that showcase backend APIs, services, and GitHub links
-- 📇 **Contact section** for professional reach-outs
-- 🧩 **SEO-ready meta tags** for indexing
+- ⚙️ **Java & Android-focused branding & content**
+- ✨ **Modern single-page design** with smooth scrolling navigation
+- 🌍 **Fully responsive** for all devices and screen sizes
+- 🔄 **Interactive animations** and scroll-triggered effects
+- 📱 **Mobile-first approach** with touch-friendly interactions
+- 📦 **Project showcase** with detailed technology stacks
+- 📇 **Professional contact section** for collaborations
+- 🧩 **SEO-optimized** with proper meta tags and structure
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer           | Technologies Used                   |
-|-----------------|-------------------------------------|
-| Backend         | Java 17, Spring Boot, Maven         |
-| APIs & Services | RESTful APIs, Spring Web, Spring MVC|
-| DB Integration  | MySQL, PostgreSQL, Hibernate        |
-| Security        | Spring Security, JWT Authentication|
-| Frontend (Light)| HTML5, CSS3, Vanilla JavaScript     |
-| Tools           | Postman, IntelliJ, Git, GitHub      |
-| Deployment      | GitHub Pages / Netlify / Render     |
+| Category | Technologies |
+|----------|--------------|
+| **Backend Development** | Java 17, Spring Boot, Spring Security, RESTful APIs |
+| **Mobile Development** | Android (Kotlin), Firebase, Google Maps API |
+| **Database** | MySQL, PostgreSQL, Hibernate |
+| **Tools & DevOps** | Git, GitHub, IntelliJ IDEA, Postman |
+| **Frontend** | HTML5, CSS3, Vanilla JavaScript |
+| **Deployment** | GitHub Pages, Netlify, Render |
 
 ---
 
-## 📂 Folder Structure
+## 📂 Project Structure
 
 ```bash
 📁 Portfolio/
-├── index.html          # Homepage
-├── about.html          # Backend journey and stack
-├── projects.html       # Java/Spring Boot projects
-├── contact.html        # Contact and social links
-├── styles.css          # Global styling
-├── script.js           # Scroll animations and UI logic
+├── index.html          # Single-page portfolio
+├── styles.css          # Modern responsive styling
+├── script.js           # Interactive animations & functionality
 └── README.md           # This file
 ```
 
 ---
 
-## 🧪 Sample Backend Projects
+## 🧪 Featured Projects
 
-1. **Inventory Management System (Spring Boot + MySQL)**  
-   REST API for handling stock entries, users, and purchase logs.
+### Backend Systems
+1. **Inventory Management System**  
+   Spring Boot backend with REST APIs for stock management, user authentication, and purchase tracking.
 
-2. **JWT-Based Auth Service**  
-   Microservice that issues and verifies secure JWT tokens for login sessions.
+2. **Real-Time Messaging Server**  
+   WebSocket-based chat backend service for enterprise applications with real-time messaging.
 
-3. **Real-Time Messaging Server**  
-   WebSocket-based chat backend for enterprise apps.
+3. **JWT Authentication Service**  
+   Microservice for secure JWT token generation and verification.
 
-(Explore full details in the `projects.html` section of the portfolio)
+### Mobile Applications
+1. **PingMeSafe Disaster Management**  
+   Real-time Android app providing safety information during natural calamities with location-based alerts.
+
+2. **Notes Management App**  
+   Secure Android application with local data storage, focusing on privacy and simplicity.
+
+3. **Plant Disease Detection**  
+   ML-powered system using computer vision to detect plant diseases and provide treatment recommendations.
+
+### Development Tools
+1. **Network Scanner Tool**  
+   Python-based network scanning utility for macOS and other systems.
 
 ---
 
-## 🛠 Getting Started Locally
+## 🚀 Getting Started
 
-To clone and run this website:
-
+### Local Development
 ```bash
-git clone https://github.com/naitiklovestech/portfolio.git
-cd portfolio
+git clone https://github.com/naitiklovestech/naitiklovestech.github.io.git
+cd naitiklovestech.github.io
 open index.html
 ```
 
-To deploy:
-- Upload to Netlify / GitHub Pages
-- Optional: Integrate backend endpoints using Spring Boot separately
+### Deployment
+- **GitHub Pages**: Automatically deployed from main branch
+- **Netlify**: Drag and drop deployment
+- **Custom Domain**: Configure DNS settings
 
 ---
 
-## 📬 Contact
+## 🎨 Design Features
 
-Feel free to reach out for Java backend roles, collaborations, or freelancing work.
+- **Modern UI/UX**: Clean, professional design with gradient accents
+- **Smooth Animations**: Scroll-triggered animations and hover effects
+- **Responsive Grid**: CSS Grid and Flexbox for perfect layouts
+- **Interactive Elements**: Hover effects, smooth transitions, and micro-interactions
+- **Accessibility**: Proper semantic HTML and ARIA labels
+- **Performance**: Optimized images and minimal JavaScript
 
-- 📧 Email: [singhalnaitik22@gmail.com](mailto:singhalnaitik22@gmail.com)
-- 🔗 LinkedIn: [linkedin.com/in/naitiklovestech](https://linkedin.com/in/naitiklovestech)
-- 🐙 GitHub: [github.com/naitiklovestech](https://github.com/naitiklovestech)
+---
+
+## 📬 Contact & Collaboration
+
+I'm always open to discussing new opportunities, whether it's:
+- Full-time Java/Android development roles
+- Freelance backend projects
+- Open source collaborations
+- Technology discussions
+
+### Get In Touch
+- 📧 **Email**: [singhalnaitik22@gmail.com](mailto:singhalnaitik22@gmail.com)
+- 🔗 **LinkedIn**: [linkedin.com/in/naitiklovestech](https://linkedin.com/in/naitiklovestech)
+- 🐙 **GitHub**: [github.com/naitiklovestech](https://github.com/naitiklovestech)
+- 🐦 **Twitter**: [@Naitiklovestech](https://twitter.com/Naitiklovestech)
 
 ---
 
 ## 📄 License
 
-This portfolio is open-source for learning and customization.  
+This portfolio is open-source and available for learning and customization.  
 Attribution is appreciated if reused. ⚖️
+
+---
+
+## 🔄 Recent Updates
+
+- **v2.0**: Complete redesign as single-page application
+- **v2.0**: Modern UI with gradient design and animations
+- **v2.0**: Focused content for Java & Android development
+- **v2.0**: Enhanced mobile responsiveness
+- **v2.0**: Interactive project showcase with technology tags

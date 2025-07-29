@@ -3,152 +3,477 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Naitik Singhal's portfolio">
-  <title>Naitik Singhal's Portfolio</title>
+  <meta name="description" content="Naitik Singhal - Java & Android Developer | Backend Architect | Spring Boot Specialist">
+  <meta name="keywords" content="Java Developer, Android Developer, Spring Boot, Backend Development, REST APIs">
+  <meta name="author" content="Naitik Singhal">
+  <title>Naitik Singhal - Java & Android Developer</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    /* Landing section with parallax */
-    #landing {
-      background: radial-gradient(circle at center, #111 0%, #000 100%);
-      padding: 140px 20px;
-      text-align: center;
-      overflow: hidden;
-      perspective: 800px;
-    }
-    #landing h1 {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      color: #FFB300;
-      transform-style: preserve-3d;
-      transition: transform 0.5s;
-    }
-    #landing p {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-      color: #f5f5f5;
-      transform-style: preserve-3d;
-      transition: transform 0.5s;
-    }
-
-    /* Animated line divider */
-    .divider {
-      width: 150px;
-      height: 3px;
-      background: #FFB300;
-      margin: 30px auto;
-      position: relative;
-      overflow: hidden;
-    }
-    .divider::after {
-      content: '';
-      position: absolute;
-      left: -50%;
-      width: 50%;
-      height: 100%;
-      background: #fff;
-      animation: moveDivider 1.5s infinite linear;
-    }
-    @keyframes moveDivider {
-      0% { left: -50%; }
-      100% { left: 100%; }
-    }
-
-    /* Section fade/slide animations */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease-out;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* 3D parallax effect JS applied class */
-    .parallax {
-      will-change: transform;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-    <header>
-        <div class="container">
-          <h1 class="logo">Naitik Singhal</h1>
-          <nav>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="projects.html">Projects</a></li>
-              <li><a href="contact.html">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-      
-
-<section id="landing">
-  <h1 class="parallax" id="heroText">Hello, I'm Naitik</h1>
-  <p class="parallax" id="heroSub">Android Developer | Machine Learning Enthusiast</p>
-  <a href="about.html" class="btn">Learn More</a>
-</section>
-
-<div class="divider"></div>
-
-<section id="projects" class="section fade-up">
-  <div class="container">
-    <h2>Featured Projects</h2>
-    <div class="project-list">
-      <div class="project-card">
-        <h3>Plant Disease Detection</h3>
-        <p>An ML model to detect diseases in plants and help enthusiasts.</p>
-        <a href="https://github.com/naitiklovestech/plant-disease-detection" class="btn" target="_blank">View Project</a>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-text">Naitik Singhal</span>
       </div>
-      <div class="project-card">
-        <h3>Notes Management App</h3>
-        <p>A secure local notes app focusing on privacy and simplicity.</p>
-        <a href="https://github.com/naitiklovestech/notes-management-system" class="btn" target="_blank">View Project</a>
-      </div>
-      <div class="project-card">
-        <h3>PingMeSafe App</h3>
-        <p>A disaster management tool providing live safety information.</p>
-        <a href="https://github.com/naitiklovestech/PingMeSafe" class="btn" target="_blank">View Project</a>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#home" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#about" class="nav-link">About</a>
+        </li>
+        <li class="nav-item">
+          <a href="#skills" class="nav-link">Skills</a>
+        </li>
+        <li class="nav-item">
+          <a href="#projects" class="nav-link">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="#contact" class="nav-link">Contact</a>
+        </li>
+      </ul>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<div class="divider"></div>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            <span class="gradient-text">Hello, I'm Naitik</span>
+          </h1>
+          <h2 class="hero-subtitle">Java & Android Developer</h2>
+          <p class="hero-description">
+            Backend architect specializing in scalable Java applications, Spring Boot microservices, 
+            and native Android development. Building robust systems that power modern applications.
+          </p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="code-animation">
+            <div class="code-line">public class Developer {</div>
+            <div class="code-line">  private String passion = "Java";</div>
+            <div class="code-line">  private String focus = "Backend";</div>
+            <div class="code-line">  public void build() {</div>
+            <div class="code-line">    return "Amazing Apps";</div>
+            <div class="code-line">  }</div>
+            <div class="code-line">}</div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+  </section>
 
-<footer>
-  <div class="container">
-    <p>&copy; 2024 Naitik Singhal. All rights reserved.</p>
-  </div>
-</footer>
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">Passionate about building scalable backend systems</p>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Core Java & Spring Boot Developer</h3>
+          <p>
+            I'm a dedicated backend developer with expertise in Java ecosystem and Android development. 
+            My passion lies in creating scalable architectures, clean code, and backend-first solutions 
+            that power modern applications.
+          </p>
+          <p>
+            With a strong foundation in Core Java, Spring Boot, and Android development, I specialize in 
+            building RESTful APIs, microservices, and native mobile applications. I believe in writing 
+            maintainable code that scales with business needs.
+          </p>
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-number">3+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">15+</span>
+              <span class="stat-label">Projects Completed</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Client Satisfaction</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <div class="tech-stack">
+            <div class="tech-item">
+              <i class="fab fa-java"></i>
+              <span>Java</span>
+            </div>
+            <div class="tech-item">
+              <i class="fab fa-android"></i>
+              <span>Android</span>
+            </div>
+            <div class="tech-item">
+              <i class="fas fa-leaf"></i>
+              <span>Spring</span>
+            </div>
+            <div class="tech-item">
+              <i class="fas fa-database"></i>
+              <span>MySQL</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script>
-  // Scroll-triggered animations
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.2 });
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-subtitle">Technologies I work with</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Backend Development</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <span class="skill-name">Java 17</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 95%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Spring Boot</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Spring Security</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">RESTful APIs</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 92%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Mobile Development</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <span class="skill-name">Android (Kotlin)</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 88%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Firebase</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Google Maps API</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Material Design</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 82%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Database & Tools</h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <span class="skill-name">MySQL</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 87%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">PostgreSQL</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 83%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Hibernate</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 85%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Git & GitHub</span>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  document.querySelectorAll('.fade-up').forEach(section => {
-    observer.observe(section);
-  });
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Backend systems and mobile applications I've built</p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/naitiklovestech/plant-disease-detection" target="_blank" class="project-link">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="project-link">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <h3>Plant Disease Detection System</h3>
+          <p>A machine learning-powered backend service that detects plant diseases using computer vision and provides treatment recommendations.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">TensorFlow</span>
+            <span class="tech-tag">CNN</span>
+            <span class="tech-tag">REST API</span>
+          </div>
+        </div>
 
-  // Simple 3D parallax effect on hero section
-  document.addEventListener('mousemove', e => {
-    const moveX = (window.innerWidth / 2 - e.pageX) / 50;
-    const moveY = (window.innerHeight / 2 - e.pageY) / 50;
-    document.getElementById('heroText').style.transform = `rotateY(${moveX}deg) rotateX(${moveY}deg)`;
-    document.getElementById('heroSub').style.transform = `rotateY(${moveX}deg) rotateX(${moveY}deg)`;
-  });
-</script>
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fas fa-sticky-note"></i>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/naitiklovestech/notes-management-system" target="_blank" class="project-link">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="project-link">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <h3>Notes Management App</h3>
+          <p>A secure Android application with local data storage, focusing on privacy and simplicity for personal note management.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Kotlin</span>
+            <span class="tech-tag">Android</span>
+            <span class="tech-tag">SQLite</span>
+            <span class="tech-tag">Material Design</span>
+          </div>
+        </div>
 
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/naitiklovestech/PingMeSafe" target="_blank" class="project-link">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="project-link">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <h3>PingMeSafe Disaster Management</h3>
+          <p>A real-time disaster management Android app providing live safety information during natural calamities with location-based alerts.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Kotlin</span>
+            <span class="tech-tag">Google Maps API</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Real-time Data</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fas fa-network-wired"></i>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/naitiklovestech/network-scanner" target="_blank" class="project-link">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="project-link">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <h3>Network Scanner Tool</h3>
+          <p>A lightweight network scanning utility built in Python, designed for macOS and other systems supporting Python networking.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Scapy</span>
+            <span class="tech-tag">Socket</span>
+            <span class="tech-tag">Network Security</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fas fa-boxes"></i>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="project-link">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <h3>Inventory Management System</h3>
+          <p>A comprehensive Spring Boot backend system for inventory management with REST APIs for stock entries, users, and purchase logs.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Spring Boot</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">JWT Auth</span>
+            <span class="tech-tag">REST API</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <div class="project-icon">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="project-link">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+          <h3>Real-Time Messaging Server</h3>
+          <p>A WebSocket-based chat backend service for enterprise applications with real-time messaging capabilities and user management.</p>
+          <div class="project-tech">
+            <span class="tech-tag">Spring Boot</span>
+            <span class="tech-tag">WebSocket</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Real-time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Let's discuss your next project</p>
+      </div>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Email</h3>
+              <a href="mailto:singhalnaitik22@gmail.com">singhalnaitik22@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-linkedin"></i>
+            </div>
+            <div class="contact-details">
+              <h3>LinkedIn</h3>
+              <a href="https://linkedin.com/in/naitiklovestech" target="_blank">linkedin.com/in/naitiklovestech</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-github"></i>
+            </div>
+            <div class="contact-details">
+              <h3>GitHub</h3>
+              <a href="https://github.com/naitiklovestech" target="_blank">github.com/naitiklovestech</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fab fa-twitter"></i>
+            </div>
+            <div class="contact-details">
+              <h3>Twitter</h3>
+              <a href="https://twitter.com/Naitiklovestech" target="_blank">@Naitiklovestech</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-message">
+          <h3>Ready to collaborate?</h3>
+          <p>
+            I'm always open to discussing new opportunities, whether it's a full-time role, 
+            freelance project, or just a friendly chat about technology. Feel free to reach out!
+          </p>
+          <div class="contact-cta">
+            <a href="mailto:singhalnaitik22@gmail.com" class="btn btn-primary">Send Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-text">
+          <p>&copy; 2024 Naitik Singhal. All rights reserved.</p>
+        </div>
+        <div class="footer-social">
+          <a href="https://github.com/naitiklovestech" target="_blank" class="social-link">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/naitiklovestech" target="_blank" class="social-link">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://twitter.com/Naitiklovestech" target="_blank" class="social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

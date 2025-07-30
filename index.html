@@ -438,14 +438,38 @@
             </div>
           </div>
         </div>
-        <div class="contact-message">
-          <h3>Ready to collaborate?</h3>
-          <p>
-            I'm always open to discussing new opportunities, whether it's a full-time role, 
-            freelance project, or just a friendly chat about technology. Feel free to reach out!
-          </p>
-          <div class="contact-cta">
-            <a href="mailto:singhalnaitik22@gmail.com" class="btn btn-primary">Send Email</a>
+        
+        <div class="contact-right">
+          <div class="contact-message">
+            <h3>Ready to collaborate?</h3>
+            <p>
+              I'm always open to discussing new opportunities, whether it's a full-time role, 
+              freelance project, or just a friendly chat about technology. Feel free to reach out!
+            </p>
+          </div>
+          
+          <!-- Contact Form -->
+          <div class="contact-form-container">
+            <h3>Send me a message</h3>
+            <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+              <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject *</label>
+                <input type="text" id="subject" name="subject" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
           </div>
         </div>
       </div>

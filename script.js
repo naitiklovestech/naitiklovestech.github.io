@@ -185,11 +185,157 @@ if (skillsSection) {
   skillsObserver.observe(skillsSection);
 }
 
-// Contact form validation (if you add a form later)
+// Contact form handling
+document.addEventListener('DOMContentLoaded', () => {
+  const contactForm = document.querySelector('.contact-form');
+  
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleFormSubmit);
+  }
+});
+
+function handleFormSubmit(e) {
+  e.preventDefault();
+  
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.textContent;
+  
+  // Show loading state
+  form.classList.add('loading');
+  submitBtn.textContent = 'Sending...';
+  
+  // Remove any existing messages
+  const existingMessage = form.querySelector('.form-message');
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+  
+  // Get form data
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData);
+  
+  // Basic validation
+  if (!data.name || !data.email || !data.subject || !data.message) {
+    showFormMessage(form, 'Please fill in all required fields.', 'error');
+    resetFormState(form, submitBtn, originalBtnText);
+    return;
+  }
+  
+  // Email validation
+  if (!validateEmail(data.email)) {
+    showFormMessage(form, 'Please enter a valid email address.', 'error');
+    resetFormState(form, submitBtn, originalBtnText);
+    return;
+  }
+  
+  // Submit form using Formspree
+  fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      showFormMessage(form, 'Thank you! Your message has been sent successfully. I\'ll get back to you soon.', 'success');
+      form.reset();
+    } else {
+      throw new Error('Network response was not ok');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    showFormMessage(form, 'Sorry, there was an error sending your message. Please try again or email me directly.', 'error');
+  })
+  .finally(() => {
+    resetFormState(form, submitBtn, originalBtnText);
+  });
+}
+
+function showFormMessage(form, message, type) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `form-message ${type}`;
+  messageDiv.textContent = message;
+  
+  // Insert message after the form
+  form.parentNode.insertBefore(messageDiv, form.nextSibling);
+  
+  // Auto-remove success messages after 5 seconds
+  if (type === 'success') {
+    setTimeout(() => {
+      messageDiv.remove();
+    }, 5000);
+  }
+}
+
+function resetFormState(form, submitBtn, originalText) {
+  form.classList.remove('loading');
+  submitBtn.textContent = originalText;
+}
+
+// Enhanced email validation
 function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 }
+
+// Form field validation feedback
+document.addEventListener('DOMContentLoaded', () => {
+  const formInputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+  
+  formInputs.forEach(input => {
+    input.addEventListener('blur', validateField);
+    input.addEventListener('input', clearFieldError);
+  });
+});
+
+function validateField(e) {
+  const field = e.target;
+  const value = field.value.trim();
+  
+  // Remove existing error styling
+  field.classList.remove('error');
+  
+  // Check if field is required and empty
+  if (field.hasAttribute('required') && !value) {
+    field.classList.add('error');
+    return;
+  }
+  
+  // Email validation
+  if (field.type === 'email' && value && !validateEmail(value)) {
+    field.classList.add('error');
+    return;
+  }
+  
+  // Add success styling for valid fields
+  if (value) {
+    field.classList.add('valid');
+  }
+}
+
+function clearFieldError(e) {
+  const field = e.target;
+  field.classList.remove('error');
+}
+
+// Add CSS for field validation
+const validationStyles = document.createElement('style');
+validationStyles.textContent = `
+  .form-group input.error,
+  .form-group textarea.error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+  }
+  
+  .form-group input.valid,
+  .form-group textarea.valid {
+    border-color: #22c55e !important;
+  }
+`;
+document.head.appendChild(validationStyles);
 
 // Add loading animation
 window.addEventListener('load', () => {

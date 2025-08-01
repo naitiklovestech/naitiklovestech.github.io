@@ -1,5 +1,16 @@
 // Enhanced Accessibility and Interactive Features
 
+// Floating Action Button functionality
+function scrollToContact() {
+  const contactSection = document.querySelector('#contact');
+  if (contactSection) {
+    contactSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}
+
 // Mobile Navigation Toggle with Accessibility
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');

@@ -60,16 +60,6 @@ This portfolio represents my journey in creating robust backend systems, microse
 
 ## 🧪 Featured Projects
 
-### Backend Systems
-1. **Inventory Management System**  
-   Spring Boot backend with REST APIs for stock management, user authentication, and purchase tracking.
-
-2. **Real-Time Messaging Server**  
-   WebSocket-based chat backend service for enterprise applications with real-time messaging.
-
-3. **JWT Authentication Service**  
-   Microservice for secure JWT token generation and verification.
-
 ### Mobile Applications
 1. **PingMeSafe Disaster Management**  
    Real-time Android app providing safety information during natural calamities with location-based alerts.

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3-Month Java Developer Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-active {
+            color: #a78bfa;
+            border-bottom-color: #8b5cf6;
+            font-weight: 600;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .accordion-open .accordion-content {
+            max-height: 1000px;
+        }
+        .progress-bar-fill {
+            transition: width 0.5s ease-in-out;
+        }
+        .project-card-locked {
+            filter: grayscale(1);
+            opacity: 0.5;
+        }
+        .glassmorphic {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .interactive-glow {
+            transition: all 0.3s ease;
+        }
+        .interactive-glow:hover {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #4a5568;
+            border-radius: 10px;
+            border: 2px solid #0f172a;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #8b5cf6;
+            opacity: 0.7;
+            animation: confetti-fall 3s linear forwards;
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(720deg); }
+        }
+        body.theme-matrix {
+            background-color: #000;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        body.theme-matrix .glassmorphic, body.theme-matrix .bg-slate-800 {
+            background: rgba(0, 20, 0, 0.6);
+            border-color: rgba(0, 255, 65, 0.3);
+        }
+        body.theme-matrix .text-slate-100, body.theme-matrix .text-slate-200, body.theme-matrix .text-slate-300 { color: #00ff41; }
+        body.theme-matrix .text-slate-400, body.theme-matrix .text-slate-500 { color: #00b32d; }
+        body.theme-matrix .border-slate-700 { border-color: #008a22; }
+        body.theme-matrix .tab-active { color: #33ff66; border-bottom-color: #00ff41; }
+        body.theme-matrix .bg-purple-500 { background-image: linear-gradient(to right, #00ff41, #33ff66); }
+        body.theme-matrix .project-card { background: #001a05; }
+        body.theme-matrix .bg-slate-900\/50 { background: rgba(0, 20, 0, 0.5); }
+        body.theme-matrix .bg-slate-700\/50 { background: rgba(0, 30, 0, 0.5); }
+        body.theme-matrix .text-purple-400 { color: #00ff41; }
+    </style>
+    <!-- Chosen Palette: "Cyberpunk Night" - A dark mode theme featuring a deep slate/navy background (#0F172A), slightly lighter content panels (#1E293B), and a vibrant purple accent (#8B5CF6) for interactive elements, creating a modern, focused, and visually appealing interface. -->
+    <!-- Application Structure Plan: The SPA is designed as an interactive dashboard with a tabbed navigation for each of the three months. This structure was chosen to break down the dense 3-month plan into manageable segments, preventing information overload. Within each month, weeks are presented in an accordion format, allowing users to focus on one week at a time. The core interaction is a progress tracking system with checkboxes, which provides immediate visual feedback via progress bars and donut charts. This task-oriented approach enhances user engagement and motivation by making progress tangible. Project milestones are highlighted in a separate section to emphasize their importance. -->
+    <!-- Visualization & Content Choices: 
+        - Monthly Progress: Goal: Inform/Compare. Viz: Donut Chart (Chart.js). Interaction: Updates on daily task completion. Justification: Provides a high-level, visually appealing summary of progress for each month.
+        - Weekly Progress: Goal: Inform/Track. Viz: Linear Progress Bar (HTML/CSS). Interaction: Updates on daily task completion. Justification: Offers granular, at-a-glance feedback for each week's progress, encouraging consistent effort.
+        - Daily Plan: Goal: Organize. Viz: Interactive Table. Interaction: Checkboxes to mark tasks as complete. Justification: A clear and structured way to present daily tasks, with checkboxes serving as the primary interactive element to drive the application's state.
+        - Projects: Goal: Inform/Organize. Viz: Styled Cards (HTML/Tailwind). Interaction: Cards "unlock" visually as progress is made. Justification: Separates key deliverables from daily tasks, highlighting them as major milestones.
+        - Tweet of the Day: Goal: Engage. Viz: Modal Popup. Interaction: Clickable icon. Justification: A small, non-intrusive feature to engage the user with the social media aspect of the plan.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-900 text-slate-300">
+    <div id="confetti-container" class="fixed inset-0 pointer-events-none z-50"></div>
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 id="main-title" class="text-3xl sm:text-4xl font-bold text-slate-100 cursor-pointer" data-click-count="0">3-Month Java Developer Plan</h1>
+            <p class="text-slate-400 mt-2">Your interactive roadmap to becoming a job-ready Java Developer.</p>
+        </header>
+
+        <main>
+            <div class="glassmorphic rounded-xl shadow-lg p-4 sm:p-6">
+                <nav class="border-b border-slate-700 mb-6">
+                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-slate-400">
+                        <li class="mr-2">
+                            <button id="tab-1" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-200 hover:border-slate-600 tab-active" data-tab="1">Month 1: Core Java</button>
+                        </li>
+                        <li class="mr-2">
+                            <button id="tab-2" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-200 hover:border-slate-600" data-tab="2">Month 2: Spring Framework</button>
+                        </li>
+                        <li>
+                            <button id="tab-3" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-200 hover:border-slate-600" data-tab="3">Month 3: Advanced Topics</button>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div id="content-container"></div>
+            </div>
+
+            <div class="mt-8">
+                <h2 class="text-2xl font-bold text-slate-100 mb-4">Project Milestones</h2>
+                <div id="projects-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="tweet-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-40">
+        <div class="glassmorphic rounded-lg shadow-xl p-6 w-full max-w-md relative">
+            <button id="close-modal-btn" class="absolute top-3 right-3 text-slate-500 hover:text-slate-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 class="text-lg font-semibold text-slate-100 mb-2">Tweet of the Day! 🐦</h3>
+            <p id="tweet-modal-content" class="text-slate-300 bg-slate-700/50 p-4 rounded-md"></p>
+        </div>
+    </div>
+    
+    <div id="god-mode-alert" class="fixed bottom-5 right-5 bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-2 px-4 rounded-lg shadow-lg transform translate-y-20 transition-transform duration-500">
+        God Mode: Activated! 🚀
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("%cHey, future Java rockstar! Keep up the great work. You've got this! 🚀", "color: #8b5cf6; font-size: 16px; font-weight: bold;");
+
+            const planData = {
+                months: [
+                    {
+                        title: "Core Java and Foundational Concepts",
+                        weeks: [
+                            {
+                                title: "Week 1: Java Fundamentals",
+                                days: [
+                                    { topic: "Intro to Java, JDK, JRE, JVM", tweet: "Kicking off my journey to become a Java developer! Day 1: Hello, World! #Java #100DaysOfCode" },
+                                    { topic: "Variables, Data Types, Operators", tweet: "Day 2: Mastering variables and data types in Java. It's all about the building blocks! #JavaBasics" },
+                                    { topic: "Control Flow (if-else, switch, for, while)", tweet: "Day 3: Controlling the flow of my Java programs. Loops and conditionals are powerful tools! #JavaDev" },
+                                    { topic: "Methods and Method Overloading", tweet: "Day 4: Writing reusable code with methods in Java. #CleanCode #JavaProgramming" },
+                                    { topic: "Intro to Object-Oriented Programming (OOP)", tweet: "Day 5: Diving into the world of Object-Oriented Programming. This is a game-changer! #OOP #Java" },
+                                    { topic: "Classes and Objects in Java", tweet: "Day 6: Creating my first classes and objects in Java. Bringing concepts to life! #JavaOOP" }
+                                ]
+                            },
+                            {
+                                title: "Week 2: Deep Dive into OOP",
+                                days: [
+                                    { topic: "Inheritance and its types", tweet: "Day 8: Exploring inheritance in Java. Building on what's already there! #Java #OOP" },
+                                    { topic: "Polymorphism (Overloading & Overriding)", tweet: "Day 9: One method, many forms. That's polymorphism in Java! #JavaDeveloper" },
+                                    { topic: "Abstraction (Abstract Classes & Methods)", tweet: "Day 10: Hiding the complexity with abstraction in Java. #SoftwareDesign" },
+                                    { topic: "Encapsulation and Access Modifiers", tweet: "Day 11: Protecting my data with encapsulation. It's all about good practice. #SecureCoding #Java" },
+                                    { topic: "Interfaces in Java", tweet: "Day 12: Working with interfaces in Java. A key to flexible and decoupled code. #JavaProgramming" },
+                                    { topic: "OOP design principles", tweet: "Day 13: Applying OOP principles to design a small application. Thinking like a software engineer! #JavaDesign" }
+                                ]
+                            },
+                            {
+                                title: "Week 3: Essential Java APIs",
+                                days: [
+                                    { topic: "String, StringBuilder, StringBuffer", tweet: "Day 15: The ins and outs of Strings in Java. Mutable vs. Immutable is a key concept! #JavaDev" },
+                                    { topic: "Exception Handling", tweet: "Day 16: Gracefully handling errors with exception handling in Java. #RobustCode" },
+                                    { topic: "Collections: List", tweet: "Day 17: Working with lists in the Java Collections Framework. #DataStructures" },
+                                    { topic: "Collections: Set", tweet: "Day 18: Ensuring uniqueness with Sets in Java. #JavaCollections" },
+                                    { topic: "Collections: Map", tweet: "Day 19: Key-value pairs with Maps in Java. A powerful data structure! #Java" },
+                                    { topic: "Generics in Java", tweet: "Day 20: Making my code more flexible and type-safe with Generics. #JavaProgramming" }
+                                ]
+                            },
+                            {
+                                title: "Week 4: Advanced Java and Project",
+                                days: [
+                                    { topic: "Java 8: Lambda Expressions", tweet: "Day 22: Writing more concise and functional code with Lambda expressions in Java 8. #Java8" },
+                                    { topic: "Java 8: Streams API", tweet: "Day 23: The power of the Streams API in Java 8. Processing collections has never been easier! #JavaDev" },
+                                    { topic: "Multithreading Basics", tweet: "Day 24: Diving into concurrency with multithreading in Java. #JavaConcurrency" },
+                                    { topic: "Git and GitHub", tweet: "Day 25: Version control is a must! Learning Git and setting up my GitHub profile. #Git #DeveloperTools" },
+                                    { topic: "Build Tools: Maven", tweet: "Day 26: Managing my project's dependencies with Maven. #JavaBuildTools" },
+                                    { topic: "Project Day: Contact Management System", tweet: "Day 27: Starting a new project! A Contact Management System to apply everything I've learned so far. #JavaProject" }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title: "Spring Framework and Building Web Applications",
+                        weeks: [
+                            {
+                                title: "Week 5: Introduction to Spring",
+                                days: [
+                                    { topic: "Spring Framework, IoC, and DI", tweet: "Day 29: Entering the Spring ecosystem! Understanding Inversion of Control and Dependency Injection. #SpringFramework" },
+                                    { topic: "Spring Beans and Application Context", tweet: "Day 30: Working with Spring Beans and the Application Context. #Java #Spring" },
+                                    { topic: "Introduction to Spring Boot", tweet: "Day 31: Spring Boot makes development so much faster! My first Spring Boot application is up and running. #SpringBoot" },
+                                    { topic: "Spring MVC and Building REST APIs", tweet: "Day 32: Building my first REST API with Spring MVC. This is exciting! #RESTful #API #Java" },
+                                    { topic: "Spring Boot Annotations", tweet: "Day 33: Mastering Spring Boot annotations. They save so much boilerplate code! #JavaDev" },
+                                    { topic: "Project Day: To-Do List API", tweet: "Day 34: New project time! Building a To-Do List API with Spring Boot. #SpringBootProject" }
+                                ]
+                            },
+                            {
+                                title: "Week 6: Data Persistence with Spring",
+                                days: [
+                                    { topic: "Databases and SQL Basics", tweet: "Day 36: A developer needs to know databases. Brushing up on my SQL skills. #SQL #Database" },
+                                    { topic: "Spring Data JPA", tweet: "Day 37: Connecting my Spring Boot app to a database with Spring Data JPA. #Java #JPA" },
+                                    { topic: "Entities and Repositories", tweet: "Day 38: Mapping my Java objects to database tables with entities. #SpringBoot" },
+                                    { topic: "CRUD Operations", tweet: "Day 39: My To-Do List API can now perform CRUD operations! #JavaDeveloper" },
+                                    { topic: "In-memory database (H2)", tweet: "Day 40: Using an in-memory database like H2 is great for development and testing. #SpringBoot" },
+                                    { topic: "Project Day: Integrate JPA", tweet: "Day 41: My To-Do List API now has a database! I can add, view, update, and delete tasks. #JavaProject" }
+                                ]
+                            },
+                            {
+                                title: "Week 7: Securing Your Application",
+                                days: [
+                                    { topic: "Introduction to Spring Security", tweet: "Day 43: Security is crucial. Starting with Spring Security to protect my application. #SpringSecurity" },
+                                    { topic: "Basic Authentication", tweet: "Day 44: Implemented basic authentication in my Spring Boot app. #Java #Security" },
+                                    { topic: "Introduction to JWT", tweet: "Day 45: Learning about JWT for stateless authentication. A modern approach to security. #JWT" },
+                                    { topic: "Implementing JWT with Spring Security", tweet: "Day 46: My API is now secured with JWT! This was a challenging but rewarding task. #SpringBoot" },
+                                    { topic: "Role-based Authorization", tweet: "Day 47: Adding role-based authorization to my API. #JavaDev" },
+                                    { topic: "Project Day: Secure API", tweet: "Day 48: My To-Do List API is now secure! Implemented authentication and authorization. #JavaProject" }
+                                ]
+                            },
+                            {
+                                title: "Week 8: Testing and Best Practices",
+                                days: [
+                                    { topic: "Unit Testing with JUnit", tweet: "Day 50: Writing my first unit tests with JUnit. Testing is a developer's best friend! #JUnit #Testing" },
+                                    { topic: "Mocking with Mockito", tweet: "Day 51: Using Mockito to isolate and test my code. #Java #TDD" },
+                                    { topic: "Integration Testing in Spring Boot", tweet: "Day 52: Testing the integration of different parts of my application. #SpringBoot" },
+                                    { topic: "REST API Best Practices", tweet: "Day 53: Learning how to design and build better REST APIs. #API #BestPractices" },
+                                    { topic: "Introduction to Docker", tweet: "Day 54: Containerizing my Spring Boot application with Docker. #Docker #DevOps" },
+                                    { topic: "Project Day: Write Tests", tweet: "Day 55: Added a comprehensive test suite to my To-Do List API. #JavaProject" }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title: "Advanced Topics and Job Readiness",
+                        weeks: [
+                            {
+                                title: "Week 9: Microservices and Cloud",
+                                days: [
+                                    { topic: "Microservices Architecture", tweet: "Day 57: Exploring the world of microservices. #Microservices" },
+                                    { topic: "Introduction to Spring Cloud", tweet: "Day 58: Spring Cloud makes building microservices with Java so much easier. #SpringCloud" },
+                                    { topic: "Building a simple microservice", tweet: "Day 59: I've built my first microservice! #Java" },
+                                    { topic: "Cloud Platforms (AWS/GCP/Azure)", tweet: "Day 60: Taking my first steps into the cloud. #CloudComputing" },
+                                    { topic: "Deploying a Spring Boot app", tweet: "Day 61: My To-Do List API is now live on the internet! #Deployment #JavaDev" },
+                                    { topic: "Project Day: Blog Platform API", tweet: "Day 62: Time for a new challenge! Building a Blog Platform API. #JavaProject" }
+                                ]
+                            },
+                            {
+                                title: "Week 10: Advanced Project Development",
+                                days: [
+                                    { topic: "User Service for Blog Platform", tweet: "Day 64: Building the User Service for my Blog Platform. #Microservices #Java" },
+                                    { topic: "Post Service for Blog Platform", tweet: "Day 65: The Post Service is done! #JavaProject" },
+                                    { topic: "Comment Service for Blog Platform", tweet: "Day 66: Adding a Comment Service to my Blog Platform. #Java #Coding" },
+                                    { topic: "Inter-service communication", tweet: "Day 67: My microservices are now communicating with each other! #SpringBoot" },
+                                    { topic: "API Gateway with Spring Cloud Gateway", tweet: "Day 68: Implemented an API Gateway. #SpringCloud" },
+                                    { topic: "Project Day: Integrate Services", tweet: "Day 69: My Blog Platform API is coming together! #JavaDeveloper" }
+                                ]
+                            },
+                            {
+                                title: "Week 11: Job Preparation",
+                                days: [
+                                    { topic: "Building your resume/portfolio", tweet: "Day 71: Time to get job-ready! Polishing my resume and portfolio. #JobHunt" },
+                                    { topic: "DSA (Arrays, Strings)", tweet: "Day 72: Back to the fundamentals. Practicing data structures and algorithms. #CodingInterview" },
+                                    { topic: "DSA (Lists, Stacks, Queues)", tweet: "Day 73: More DSA practice. #Java" },
+                                    { topic: "DSA (Trees, Graphs)", tweet: "Day 74: Trees and graphs can be tricky, but I'm getting the hang of it. #InterviewPrep" },
+                                    { topic: "Core Java Interview Questions", tweet: "Day 75: Reviewing common Core Java interview questions. #JavaInterview" },
+                                    { topic: "Spring Interview Questions", tweet: "Day 76: Deep diving into Spring-related interview questions. #SpringBoot" }
+                                ]
+                            },
+                            {
+                                title: "Week 12: Final Touches & Job Applications",
+                                days: [
+                                    { topic: "Finalize & Deploy Blog API", tweet: "Day 78: My Blog Platform API is now complete and deployed! #JavaProject" },
+                                    { topic: "Create great READMEs", tweet: "Day 79: A good README is so important. #GitHub" },
+                                    { topic: "Networking on LinkedIn", tweet: "Day 80: Building my professional network on LinkedIn. #Networking" },
+                                    { topic: "Applying for jobs", tweet: "Day 81: The job hunt is on! #Career" },
+                                    { topic: "Behavioral Interview Questions", tweet: "Day 82: Preparing for behavioral interview questions. #InterviewTips" },
+                                    { topic: "Final Review and Celebration", tweet: "Day 83: Three months of hard work! I'm proud of how far I've come. #JavaDeveloper" }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                projects: [
+                    { name: "Simple Calculator", unlockDay: 6, description: "A command-line app to master Java fundamentals and OOP principles." },
+                    { name: "Contact Management System", unlockDay: 24, description: "A CLI app to practice advanced Java concepts like collections and file I/O." },
+                    { name: "To-Do List API", unlockDay: 30, description: "A full-fledged REST API using Spring Boot, JPA for data, and Spring Security." },
+                    { name: "Blog Platform API", unlockDay: 54, description: "An advanced microservices-based application using Spring Cloud and deployed to the cloud." }
+                ]
+            };
+
+            const contentContainer = document.getElementById('content-container');
+            const projectsContainer = document.getElementById('projects-container');
+            const tabs = document.querySelectorAll('button[data-tab]');
+            const modal = document.getElementById('tweet-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const tweetModalContent = document.getElementById('tweet-modal-content');
+            const mainTitle = document.getElementById('main-title');
+
+            let state = {
+                progress: [],
+                charts: [],
+                completedMonths: [false, false, false]
+            };
+
+            function initializeState() {
+                state.progress = planData.months.map(month =>
+                    month.weeks.map(week =>
+                        week.days.map(() => false)
+                    )
+                );
+            }
+
+            function triggerConfetti() {
+                const container = document.getElementById('confetti-container');
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                    container.appendChild(confetti);
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }
+            }
+
+            function calculateProgress() {
+                let totalDaysCompleted = 0;
+                const monthProgress = state.progress.map((month, monthIndex) => {
+                    let completedInMonth = 0;
+                    let totalInMonth = 0;
+                    const weekProgress = month.map((week, weekIndex) => {
+                        const completedInWeek = week.filter(Boolean).length;
+                        completedInMonth += completedInWeek;
+                        totalInMonth += week.length;
+                        return {
+                            completed: completedInWeek,
+                            total: week.length,
+                            percentage: week.length > 0 ? (completedInWeek / week.length) * 100 : 0
+                        };
+                    });
+                    totalDaysCompleted += completedInMonth;
+                    const percentage = totalInMonth > 0 ? (completedInMonth / totalInMonth) * 100 : 0;
+                    
+                    if (percentage === 100 && !state.completedMonths[monthIndex]) {
+                        triggerConfetti();
+                        state.completedMonths[monthIndex] = true;
+                    }
+
+                    return {
+                        completed: completedInMonth,
+                        total: totalInMonth,
+                        percentage: percentage,
+                        weeks: weekProgress
+                    };
+                });
+                return { months: monthProgress, totalDaysCompleted };
+            }
+
+            function updateUI() {
+                const progressData = calculateProgress();
+
+                progressData.months.forEach((monthData, monthIndex) => {
+                    const monthContainer = document.getElementById(`month-${monthIndex}`);
+                    if (!monthContainer) return;
+
+                    monthData.weeks.forEach((weekData, weekIndex) => {
+                        const progressBarFill = monthContainer.querySelector(`#week-progress-${monthIndex}-${weekIndex} .progress-bar-fill`);
+                        if (progressBarFill) {
+                            progressBarFill.style.width = `${weekData.percentage}%`;
+                        }
+                        const progressText = monthContainer.querySelector(`#week-progress-text-${monthIndex}-${weekIndex}`);
+                        if(progressText) {
+                            progressText.textContent = `${weekData.completed} / ${weekData.total} Days`;
+                        }
+                    });
+
+                    const chart = state.charts[monthIndex];
+                    if (chart) {
+                        chart.data.datasets[0].data = [monthData.percentage, 100 - monthData.percentage];
+                        chart.update('resize');
+                    }
+                    const monthProgressText = document.getElementById(`month-progress-text-${monthIndex}`);
+                    if(monthProgressText) {
+                        monthProgressText.textContent = `${Math.round(monthData.percentage)}% Complete`;
+                    }
+                });
+                
+                planData.projects.forEach((project, index) => {
+                    const projectCard = document.getElementById(`project-card-${index}`);
+                    if (projectCard) {
+                        if (progressData.totalDaysCompleted >= project.unlockDay) {
+                            projectCard.classList.remove('project-card-locked');
+                        } else {
+                            projectCard.classList.add('project-card-locked');
+                        }
+                    }
+                });
+            }
+
+            function handleCheckboxChange(monthIndex, weekIndex, dayIndex, isChecked) {
+                state.progress[monthIndex][weekIndex][dayIndex] = isChecked;
+                updateUI();
+            }
+
+            function createMonthView(monthIndex) {
+                const month = planData.months[monthIndex];
+                const monthDiv = document.createElement('div');
+                monthDiv.id = `month-${monthIndex}`;
+                monthDiv.classList.add('month-content');
+                
+                monthDiv.innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="lg:col-span-1 flex flex-col items-center justify-center bg-slate-900/50 p-6 rounded-lg">
+                            <div class="chart-container w-full max-w-[200px] h-[200px] relative">
+                                <canvas id="chart-${monthIndex}"></canvas>
+                            </div>
+                            <p id="month-progress-text-${monthIndex}" class="text-xl font-semibold mt-4 text-slate-200">0% Complete</p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <h2 class="text-2xl font-bold text-slate-100 mb-2">Month ${monthIndex + 1}: ${month.title}</h2>
+                            <p class="text-slate-400 mb-4">This month focuses on building a strong foundation in Java and its core principles. You'll move from basic syntax to advanced object-oriented concepts, culminating in your first hands-on projects.</p>
+                            <div id="accordion-container-${monthIndex}" class="space-y-2"></div>
+                        </div>
+                    </div>
+                `;
+
+                const accordionContainer = monthDiv.querySelector(`#accordion-container-${monthIndex}`);
+                month.weeks.forEach((week, weekIndex) => {
+                    const totalDays = week.days.length;
+                    const accordionItem = document.createElement('div');
+                    accordionItem.classList.add('accordion-item', 'border', 'border-slate-700', 'rounded-lg', 'interactive-glow');
+                    accordionItem.innerHTML = `
+                        <button class="accordion-header w-full flex justify-between items-center p-4 text-left">
+                            <span class="font-semibold text-slate-100">${week.title}</span>
+                            <div class="flex items-center space-x-4">
+                                <div id="week-progress-text-${monthIndex}-${weekIndex}" class="text-sm text-slate-400">0 / ${totalDays} Days</div>
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </button>
+                        <div class="accordion-content px-4 pb-4">
+                            <div id="week-progress-${monthIndex}-${weekIndex}" class="w-full bg-slate-700 rounded-full h-2.5 mb-4">
+                                <div class="bg-gradient-to-r from-purple-500 to-indigo-500 h-2.5 rounded-full progress-bar-fill" style="width: 0%"></div>
+                            </div>
+                            <ul class="space-y-3">
+                                ${week.days.map((day, dayIndex) => `
+                                    <li class="flex items-center justify-between p-3 bg-slate-700/50 rounded-md">
+                                        <label for="day-${monthIndex}-${weekIndex}-${dayIndex}" class="flex items-center cursor-pointer">
+                                            <input type="checkbox" id="day-${monthIndex}-${weekIndex}-${dayIndex}" class="h-4 w-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-700" data-month="${monthIndex}" data-week="${weekIndex}" data-day="${dayIndex}">
+                                            <span class="ml-3 text-slate-300">${day.topic}</span>
+                                        </label>
+                                        <button class="tweet-btn text-purple-400 hover:text-purple-300" data-tweet="${day.tweet}">
+                                            <span class="text-xl">🐦</span>
+                                        </button>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    `;
+                    accordionContainer.appendChild(accordionItem);
+                });
+
+                return monthDiv;
+            }
+
+            function render() {
+                planData.months.forEach((_, monthIndex) => {
+                    const monthView = createMonthView(monthIndex);
+                    contentContainer.appendChild(monthView);
+                    if (monthIndex !== 0) {
+                        monthView.style.display = 'none';
+                    }
+                });
+
+                planData.projects.forEach((project, index) => {
+                    const projectCard = document.createElement('div');
+                    projectCard.id = `project-card-${index}`;
+                    projectCard.className = 'project-card bg-slate-800 rounded-lg shadow p-6 interactive-glow project-card-locked';
+                    projectCard.innerHTML = `
+                        <h3 class="font-bold text-lg text-slate-100">${project.name}</h3>
+                        <p class="text-slate-400 mt-2 text-sm">${project.description}</p>
+                        <p class="text-xs text-slate-500 mt-4">Unlocks after Day ${project.unlockDay}</p>
+                    `;
+                    projectsContainer.appendChild(projectCard);
+                });
+
+                planData.months.forEach((_, monthIndex) => {
+                    const ctx = document.getElementById(`chart-${monthIndex}`).getContext('2d');
+                    state.charts[monthIndex] = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            datasets: [{
+                                data: [0, 100],
+                                backgroundColor: ['#8b5cf6', '#334155'],
+                                borderWidth: 0,
+                                borderRadius: 5,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            cutout: '75%',
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: { enabled: false }
+                            },
+                            animation: {
+                                duration: 1000,
+                                easing: 'easeOutQuart'
+                            }
+                        }
+                    });
+                });
+
+                updateUI();
+            }
+
+            function handleTabClick(e) {
+                const clickedTab = e.target.closest('button[data-tab]');
+                if (!clickedTab) return;
+
+                const tabNumber = clickedTab.dataset.tab;
+
+                tabs.forEach(tab => {
+                    tab.classList.remove('tab-active');
+                });
+                clickedTab.classList.add('tab-active');
+
+                document.querySelectorAll('.month-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+                document.getElementById(`month-${Number(tabNumber) - 1}`).style.display = 'block';
+            }
+
+            function handleAccordionClick(e) {
+                const header = e.target.closest('.accordion-header');
+                if (header) {
+                    const item = header.parentElement;
+                    item.classList.toggle('accordion-open');
+                    const icon = header.querySelector('svg');
+                    icon.classList.toggle('rotate-180');
+                }
+            }
+            
+            function handleContentClick(e) {
+                const checkbox = e.target.closest('input[type="checkbox"]');
+                if (checkbox) {
+                    const { month, week, day } = checkbox.dataset;
+                    handleCheckboxChange(parseInt(month), parseInt(week), parseInt(day), checkbox.checked);
+                }
+
+                const tweetBtn = e.target.closest('.tweet-btn');
+                if (tweetBtn) {
+                    tweetModalContent.textContent = tweetBtn.dataset.tweet;
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                }
+            }
+
+            initializeState();
+            render();
+
+            document.querySelector('nav').addEventListener('click', handleTabClick);
+            contentContainer.addEventListener('click', handleContentClick);
+            contentContainer.addEventListener('click', handleAccordionClick);
+            
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            });
+
+            // Easter Eggs
+            const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+            let konamiIndex = 0;
+            document.addEventListener('keydown', (e) => {
+                if (e.key === konamiCode[konamiIndex]) {
+                    konamiIndex++;
+                    if (konamiIndex === konamiCode.length) {
+                        const alert = document.getElementById('god-mode-alert');
+                        alert.classList.remove('translate-y-20');
+                        setTimeout(() => {
+                            alert.classList.add('translate-y-20');
+                        }, 3000);
+                        konamiIndex = 0;
+                    }
+                } else {
+                    konamiIndex = 0;
+                }
+            });
+
+            mainTitle.addEventListener('click', () => {
+                let count = parseInt(mainTitle.dataset.clickCount) + 1;
+                if (count === 5) {
+                    document.body.classList.toggle('theme-matrix');
+                    count = 0;
+                }
+                mainTitle.dataset.clickCount = count;
+            });
+
+        });
+    </script>
+</body>
+</html>

@@ -6,19 +6,105 @@
   <meta name="description" content="Naitik Singhal - Java & Android Developer | Backend Architect | Spring Boot Specialist">
   <meta name="keywords" content="Java Developer, Android Developer, Spring Boot, Backend Development, REST APIs">
   <meta name="author" content="Naitik Singhal">
-  <meta name="theme-color" content="#667eea">
-  <meta name="color-scheme" content="dark">
   <title>Naitik Singhal - Java & Android Developer</title>
-  
-  <!-- Preload critical resources -->
-  <link rel="preload" href="styles.css" as="style">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-  <link rel="preload" href="script.js" as="script">
-  
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Styles for the popup -->
+  <style>
+    /* Popup Overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: none; /* Initially hidden */
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .popup-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Popup Container */
+    .popup-container {
+      background: #1a1a2e; /* Matching the dark theme */
+      color: #e0e0e0;
+      padding: 2.5rem;
+      border-radius: 15px;
+      border: 1px solid #4a4a7a;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      transform: scale(0.95);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    .popup-overlay.active .popup-container {
+        transform: scale(1);
+    }
+
+    .popup-container h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .popup-container p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* Reusing button styles from the main page for consistency */
+    .popup-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    }
+    
+    .popup-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.5rem;
+        color: #e0e0e0;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+    .popup-close:hover {
+        color: #2575fc;
+    }
+
+  </style>
 </head>
 <body>
   <!-- Skip Navigation for Accessibility -->
@@ -61,11 +147,11 @@
           <a href="#contact" class="nav-link" role="menuitem">Contact</a>
         </li>
       </ul>
-      <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu" type="button">
-        <span class="bar" aria-hidden="true"></span>
-        <span class="bar" aria-hidden="true"></span>
-        <span class="bar" aria-hidden="true"></span>
-      </button>
+      <div class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
     </div>
   </nav>
 
@@ -79,11 +165,10 @@
             <h1 class="hero-title">
               <span class="gradient-text">Hello, I'm Naitik</span>
             </h1>
-            <h2 class="hero-subtitle">Senior Java & Android Developer</h2>
+            <h2 class="hero-subtitle">Java & Android Developer</h2>
             <p class="hero-description">
-              Backend architect and mobile developer with 3+ years of experience building enterprise-grade 
-              Java applications, Spring Boot microservices, and native Android apps. Passionate about 
-              clean code, scalable architecture, and user-centric design.
+              Backend architect specializing in scalable Java applications, Spring Boot microservices, 
+              and native Android development. Building robust systems that power modern applications.
             </p>
             <div class="hero-buttons">
               <a href="#projects" class="btn btn-primary" aria-label="View my projects">View My Work</a>
@@ -91,21 +176,18 @@
             </div>
           </div>
           <div class="hero-visual">
-            <div class="code-animation" role="img" aria-label="Animated code example showing Java Spring Boot and Android development">
-              <div class="code-line">@SpringBootApplication</div>
-              <div class="code-line">public class PortfolioApp {</div>
-              <div class="code-line">  @Autowired</div>
-              <div class="code-line">  private JavaService javaService;</div>
-              <div class="code-line">  </div>
-              <div class="code-line">  @GetMapping("/api/projects")</div>
-              <div class="code-line">  public List&lt;Project&gt; getProjects() {</div>
-              <div class="code-line">    return javaService.buildApps();</div>
+            <div class="code-animation" role="img" aria-label="Animated code example">
+              <div class="code-line">public class Developer {</div>
+              <div class="code-line">  private String passion = "Java";</div>
+              <div class="code-line">  private String focus = "Backend";</div>
+              <div class="code-line">  public void build() {</div>
+              <div class="code-line">    return "Amazing Apps";</div>
               <div class="code-line">  }</div>
               <div class="code-line">}</div>
             </div>
           </div>
         </div>
-        <div class="scroll-indicator" aria-label="Scroll down to explore more content">
+        <div class="scroll-indicator" aria-label="Scroll down to explore more">
           <div class="scroll-arrow"></div>
         </div>
       </div>
@@ -120,31 +202,17 @@
         </div>
         <div class="about-content">
           <div class="about-text">
-            <h3>Senior Java & Android Developer</h3>
+            <h3>Core Java & Spring Boot Developer</h3>
             <p>
-              I'm a passionate Java backend architect and Android developer with 3+ years of experience 
-              building enterprise-grade applications. My expertise spans from Core Java fundamentals to 
-              modern Spring Boot microservices and native Android development.
+              I'm a dedicated backend developer with expertise in Java ecosystem and Android development. 
+              My passion lies in creating scalable architectures, clean code, and backend-first solutions 
+              that power modern applications.
             </p>
             <p>
-              I specialize in designing scalable backend architectures, implementing RESTful APIs with 
-              Spring Boot, and creating intuitive Android applications. My approach focuses on clean code, 
-              performance optimization, and user-centric design principles.
+              With a strong foundation in Core Java, Spring Boot, and Android development, I specialize in 
+              building RESTful APIs, microservices, and native mobile applications. I believe in writing 
+              maintainable code that scales with business needs.
             </p>
-            <div class="about-highlights">
-              <div class="highlight-item">
-                <i class="fas fa-server" aria-hidden="true"></i>
-                <span>Backend Architecture</span>
-              </div>
-              <div class="highlight-item">
-                <i class="fab fa-android" aria-hidden="true"></i>
-                <span>Native Android Apps</span>
-              </div>
-              <div class="highlight-item">
-                <i class="fas fa-code" aria-hidden="true"></i>
-                <span>Clean Code Practices</span>
-              </div>
-            </div>
           </div>
           <div class="about-image">
             <div class="tech-stack" role="list" aria-label="Technology stack">
@@ -170,8 +238,6 @@
       </div>
     </section>
 
-
-
     <!-- Skills Section -->
     <section id="skills" class="skills" role="region" aria-labelledby="skills-title">
       <div class="container">
@@ -184,33 +250,27 @@
             <h3>Backend Development</h3>
             <div class="skill-items" role="list" aria-label="Backend development skills">
               <div class="skill-item" role="listitem">
-                <span class="skill-name">Core Java 17</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Core Java 17 proficiency 95%">
+                <span class="skill-name">Java 17</span>
+                <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 95%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
-                <span class="skill-name">Spring Boot 3.x</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Spring Boot 3.x proficiency 90%">
+                <span class="skill-name">Spring Boot</span>
+                <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 90%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
                 <span class="skill-name">Spring Security</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Spring Security proficiency 85%">
+                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 85%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
                 <span class="skill-name">RESTful APIs</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="RESTful APIs proficiency 92%">
+                <div class="skill-bar" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 92%"></div>
-                </div>
-              </div>
-              <div class="skill-item" role="listitem">
-                <span class="skill-name">Microservices</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Microservices proficiency 88%">
-                  <div class="skill-progress" style="width: 88%"></div>
                 </div>
               </div>
             </div>
@@ -219,32 +279,26 @@
             <h3>Mobile Development</h3>
             <div class="skill-items" role="list" aria-label="Mobile development skills">
               <div class="skill-item" role="listitem">
-                <span class="skill-name">Android (Java)</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Android Java proficiency 88%">
+                <span class="skill-name">Android (Kotlin)</span>
+                <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 88%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
-                <span class="skill-name">Android SDK</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Android SDK proficiency 85%">
-                  <div class="skill-progress" style="width: 85%"></div>
-                </div>
-              </div>
-              <div class="skill-item" role="listitem">
                 <span class="skill-name">Firebase</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Firebase proficiency 80%">
+                <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 80%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
                 <span class="skill-name">Google Maps API</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Google Maps API proficiency 85%">
+                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 85%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
-                <span class="skill-name">Material Design 3</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="Material Design 3 proficiency 82%">
+                <span class="skill-name">Material Design</span>
+                <div class="skill-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 82%"></div>
                 </div>
               </div>
@@ -255,32 +309,26 @@
             <div class="skill-items" role="list" aria-label="Database and tools skills">
               <div class="skill-item" role="listitem">
                 <span class="skill-name">MySQL</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100" aria-label="MySQL proficiency 87%">
+                <div class="skill-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 87%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
                 <span class="skill-name">PostgreSQL</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" aria-label="PostgreSQL proficiency 83%">
+                <div class="skill-bar" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 83%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
-                <span class="skill-name">Hibernate JPA</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="Hibernate JPA proficiency 85%">
+                <span class="skill-name">Hibernate</span>
+                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 85%"></div>
                 </div>
               </div>
               <div class="skill-item" role="listitem">
                 <span class="skill-name">Git & GitHub</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="Git and GitHub proficiency 90%">
+                <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
                   <div class="skill-progress" style="width: 90%"></div>
-                </div>
-              </div>
-              <div class="skill-item" role="listitem">
-                <span class="skill-name">Maven/Gradle</span>
-                <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="Maven/Gradle proficiency 88%">
-                  <div class="skill-progress" style="width: 88%"></div>
                 </div>
               </div>
             </div>
@@ -294,19 +342,16 @@
       <div class="container">
         <div class="section-header">
           <h2 id="projects-title" class="section-title">Featured Projects</h2>
-          <p class="section-subtitle">Showcasing my expertise in Java backend development and Android applications</p>
+          <p class="section-subtitle">Backend systems and mobile applications I've built</p>
         </div>
         <div class="projects-grid">
-          <article class="project-card featured">
+          <div class="project-card" role="article">
             <div class="project-header">
               <div class="project-icon">
                 <i class="fas fa-leaf" aria-hidden="true"></i>
               </div>
-              <div class="project-badge">
-                <span class="badge-text">Featured</span>
-              </div>
               <div class="project-links">
-                <a href="https://github.com/naitiklovestech/plant-friend" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Plant Disease Detection project on GitHub">
+                <a href="https://github.com/naitiklovestech/plant-friend" target="_blank" class="project-link" aria-label="View Plant Disease Detection project on GitHub">
                   <i class="fab fa-github" aria-hidden="true"></i>
                 </a>
                 <a href="#" class="project-link" aria-label="View Plant Disease Detection project live">
@@ -314,40 +359,23 @@
                 </a>
               </div>
             </div>
-            <div class="project-content">
-              <h3>Plant Disease Detection System</h3>
-              <p class="project-description">A comprehensive ML-powered backend service with RESTful APIs that analyzes plant images using CNN models and provides real-time disease detection with treatment recommendations. Features include image preprocessing, model inference, and result caching.</p>
-              <div class="project-features">
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Real-time image analysis</span>
-                </div>
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>CNN-based disease detection</span>
-                </div>
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>RESTful API integration</span>
-                </div>
-              </div>
-              <div class="project-tech" role="list" aria-label="Technologies used">
-                <span class="tech-tag" role="listitem">Python</span>
-                <span class="tech-tag" role="listitem">TensorFlow</span>
-                <span class="tech-tag" role="listitem">CNN</span>
-                <span class="tech-tag" role="listitem">REST API</span>
-                <span class="tech-tag" role="listitem">Redis</span>
-              </div>
+            <h3>Plant Disease Detection System</h3>
+            <p>A machine learning-powered backend service that detects plant diseases using computer vision and provides treatment recommendations.</p>
+            <div class="project-tech" role="list" aria-label="Technologies used">
+              <span class="tech-tag" role="listitem">Python</span>
+              <span class="tech-tag" role="listitem">TensorFlow</span>
+              <span class="tech-tag" role="listitem">CNN</span>
+              <span class="tech-tag" role="listitem">REST API</span>
             </div>
-          </article>
+          </div>
 
-          <article class="project-card">
+          <div class="project-card" role="article">
             <div class="project-header">
               <div class="project-icon">
                 <i class="fas fa-sticky-note" aria-hidden="true"></i>
               </div>
               <div class="project-links">
-                <a href="https://github.com/naitiklovestech/notes-management-system" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Notes Management project on GitHub">
+                <a href="https://github.com/naitiklovestech/notes-management-system" target="_blank" class="project-link" aria-label="View Notes Management project on GitHub">
                   <i class="fab fa-github" aria-hidden="true"></i>
                 </a>
                 <a href="#" class="project-link" aria-label="View Notes Management project live">
@@ -355,41 +383,24 @@
                 </a>
               </div>
             </div>
-            <div class="project-content">
-              <h3>Notes Management App</h3>
-              <p class="project-description">A feature-rich Android application built with Java featuring CRUD operations, search functionality, categories, and offline-first architecture. Implements Material Design 3 principles with smooth animations and intuitive user experience.</p>
-              <div class="project-features">
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>CRUD operations</span>
-                </div>
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Search & categories</span>
-                </div>
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Material Design 3</span>
-                </div>
-              </div>
-              <div class="project-tech" role="list" aria-label="Technologies used">
-                <span class="tech-tag" role="listitem">Java</span>
-                <span class="tech-tag" role="listitem">XML</span>
-                <span class="tech-tag" role="listitem">Android</span>
-                <span class="tech-tag" role="listitem">SQLite</span>
-                <span class="tech-tag" role="listitem">Material Design</span>
-                <span class="tech-tag" role="listitem">Room Database</span>
-              </div>
+            <h3>Notes Management App</h3>
+            <p>A secure Android application with local data storage, focusing on privacy and simplicity for personal note management.</p>
+            <div class="project-tech" role="list" aria-label="Technologies used">
+              <span class="tech-tag" role="listitem">Java</span>
+              <span class="tech-tag" role="listitem">XML</span>
+              <span class="tech-tag" role="listitem">Android</span>
+              <span class="tech-tag" role="listitem">SQLite</span>
+              <span class="tech-tag" role="listitem">Material Design</span>
             </div>
-          </article>
+          </div>
 
-          <article class="project-card">
+          <div class="project-card" role="article">
             <div class="project-header">
               <div class="project-icon">
                 <i class="fas fa-shield-alt" aria-hidden="true"></i>
               </div>
               <div class="project-links">
-                <a href="https://github.com/naitiklovestech/PingMeSafe" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View PingMeSafe project on GitHub">
+                <a href="https://github.com/naitiklovestech/PingMeSafe" target="_blank" class="project-link" aria-label="View PingMeSafe project on GitHub">
                   <i class="fab fa-github" aria-hidden="true"></i>
                 </a>
                 <a href="#" class="project-link" aria-label="View PingMeSafe project live">
@@ -397,41 +408,24 @@
                 </a>
               </div>
             </div>
-            <div class="project-content">
-              <h3>PingMeSafe Disaster Management</h3>
-              <p class="project-description">A comprehensive disaster management Android application with real-time location tracking, emergency alerts, and community safety features. Integrates Google Maps API for geolocation services and Firebase for real-time data synchronization.</p>
-              <div class="project-features">
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Real-time location tracking</span>
-                </div>
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Emergency alerts</span>
-                </div>
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Google Maps integration</span>
-                </div>
-              </div>
-              <div class="project-tech" role="list" aria-label="Technologies used">
-                <span class="tech-tag" role="listitem">Java</span>
-                <span class="tech-tag" role="listitem">XML</span>
-                <span class="tech-tag" role="listitem">Google Maps API</span>
-                <span class="tech-tag" role="listitem">Firebase</span>
-                <span class="tech-tag" role="listitem">Real-time Data</span>
-                <span class="tech-tag" role="listitem">Location Services</span>
-              </div>
+            <h3>PingMeSafe Disaster Management</h3>
+            <p>A real-time disaster management Android app providing live safety information during natural calamities with location-based alerts.</p>
+            <div class="project-tech" role="list" aria-label="Technologies used">
+              <span class="tech-tag" role="listitem">Java</span>
+              <span class="tech-tag" role="listitem">XML</span>
+              <span class="tech-tag" role="listitem">Google Maps API</span>
+              <span class="tech-tag" role="listitem">Firebase</span>
+              <span class="tech-tag" role="listitem">Real-time Data</span>
             </div>
-          </article>
+          </div>
 
-          <article class="project-card">
+          <div class="project-card" role="article">
             <div class="project-header">
               <div class="project-icon">
                 <i class="fas fa-network-wired" aria-hidden="true"></i>
               </div>
               <div class="project-links">
-                <a href="https://github.com/naitiklovestech/network-scanner-python" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View Network Scanner project on GitHub">
+                <a href="https://github.com/naitiklovestech/network-scanner-python" target="_blank" class="project-link" aria-label="View Network Scanner project on GitHub">
                   <i class="fab fa-github" aria-hidden="true"></i>
                 </a>
                 <a href="#" class="project-link" aria-label="View Network Scanner project live">
@@ -439,31 +433,15 @@
                 </a>
               </div>
             </div>
-            <div class="project-content">
-              <h3>Network Scanner Tool</h3>
-              <p class="project-description">A lightweight network scanning utility built in Python, designed for macOS and other systems supporting Python networking. Provides comprehensive network analysis and security assessment capabilities.</p>
-              <div class="project-features">
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Network discovery</span>
-                </div>
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Port scanning</span>
-                </div>
-                <div class="feature-item">
-                  <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  <span>Security assessment</span>
-                </div>
-              </div>
-              <div class="project-tech" role="list" aria-label="Technologies used">
-                <span class="tech-tag" role="listitem">Python</span>
-                <span class="tech-tag" role="listitem">Scapy</span>
-                <span class="tech-tag" role="listitem">Socket</span>
-                <span class="tech-tag" role="listitem">Network Security</span>
-              </div>
+            <h3>Network Scanner Tool</h3>
+            <p>A lightweight network scanning utility built in Python, designed for macOS and other systems supporting Python networking.</p>
+            <div class="project-tech" role="list" aria-label="Technologies used">
+              <span class="tech-tag" role="listitem">Python</span>
+              <span class="tech-tag" role="listitem">Scapy</span>
+              <span class="tech-tag" role="listitem">Socket</span>
+              <span class="tech-tag" role="listitem">Network Security</span>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
@@ -492,7 +470,7 @@
               </div>
               <div class="contact-details">
                 <h3>LinkedIn</h3>
-                <a href="https://linkedin.com/in/naitiklovestech" target="_blank" rel="noopener noreferrer">linkedin.com/in/naitiklovestech</a>
+                <a href="https://linkedin.com/in/naitiklovestech" target="_blank">linkedin.com/in/naitiklovestech</a>
               </div>
             </div>
             <div class="contact-item">
@@ -501,7 +479,7 @@
               </div>
               <div class="contact-details">
                 <h3>GitHub</h3>
-                <a href="https://github.com/naitiklovestech" target="_blank" rel="noopener noreferrer">github.com/naitiklovestech</a>
+                <a href="https://github.com/naitiklovestech" target="_blank">github.com/naitiklovestech</a>
               </div>
             </div>
             <div class="contact-item">
@@ -510,7 +488,7 @@
               </div>
               <div class="contact-details">
                 <h3>Twitter</h3>
-                <a href="https://twitter.com/Naitiklovestech" target="_blank" rel="noopener noreferrer">@Naitiklovestech</a>
+                <a href="https://twitter.com/Naitiklovestech" target="_blank">@Naitiklovestech</a>
               </div>
             </div>
           </div>
@@ -527,38 +505,28 @@
             <!-- Contact Form -->
             <div class="contact-form-container">
               <h3>Send me a message</h3>
-              <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST" novalidate>
+              <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
                 <div class="form-group">
                   <label for="name">Name *</label>
-                  <input type="text" id="name" name="name" required aria-describedby="name-error" autocomplete="name" placeholder="Your full name">
+                  <input type="text" id="name" name="name" required aria-describedby="name-error">
                   <div id="name-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
                 <div class="form-group">
                   <label for="email">Email *</label>
-                  <input type="email" id="email" name="email" required aria-describedby="email-error" autocomplete="email" placeholder="your.email@example.com">
+                  <input type="email" id="email" name="email" required aria-describedby="email-error">
                   <div id="email-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
                 <div class="form-group">
                   <label for="subject">Subject *</label>
-                  <select id="subject" name="subject" required aria-describedby="subject-error">
-                    <option value="">Select a subject</option>
-                    <option value="job-opportunity">Job Opportunity</option>
-                    <option value="freelance-project">Freelance Project</option>
-                    <option value="collaboration">Collaboration</option>
-                    <option value="consultation">Consultation</option>
-                    <option value="other">Other</option>
-                  </select>
+                  <input type="text" id="subject" name="subject" required aria-describedby="subject-error">
                   <div id="subject-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
                 <div class="form-group">
                   <label for="message">Message *</label>
-                  <textarea id="message" name="message" rows="5" required aria-describedby="message-error" autocomplete="off" placeholder="Tell me about your project or opportunity..."></textarea>
+                  <textarea id="message" name="message" rows="5" required aria-describedby="message-error"></textarea>
                   <div id="message-error" class="error-message" role="alert" aria-live="polite"></div>
                 </div>
-                <button type="submit" class="btn btn-primary">
-                  <span class="btn-text">Send Message</span>
-                  <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                </button>
+                <button type="submit" class="btn btn-primary">Send Message</button>
               </form>
             </div>
           </div>
@@ -575,25 +543,71 @@
           <p>&copy; 2024 Naitik Singhal. All rights reserved.</p>
         </div>
         <div class="footer-social">
-          <a href="https://github.com/naitiklovestech" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visit my GitHub profile">
+          <a href="https://github.com/naitiklovestech" target="_blank" class="social-link" aria-label="Visit my GitHub profile">
             <i class="fab fa-github" aria-hidden="true"></i>
           </a>
-          <a href="https://linkedin.com/in/naitiklovestech" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visit my LinkedIn profile">
+          <a href="https://linkedin.com/in/naitiklovestech" target="_blank" class="social-link" aria-label="Visit my LinkedIn profile">
             <i class="fab fa-linkedin" aria-hidden="true"></i>
           </a>
-          <a href="https://twitter.com/Naitiklovestech" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Visit my Twitter profile">
+          <a href="https://twitter.com/Naitiklovestech" target="_blank" class="social-link" aria-label="Visit my Twitter profile">
             <i class="fab fa-twitter" aria-hidden="true"></i>
           </a>
         </div>
       </div>
     </div>
   </footer>
+  
+  <!-- Popup HTML -->
+  <div class="popup-overlay" id="roadmap-popup">
+      <div class="popup-container">
+          <i class="fas fa-times popup-close" id="popup-close-icon"></i>
+          <h2>My Java Developer Roadmap</h2>
+          <p>
+              Interested in the path I took? Check out my detailed roadmap for becoming 
+              a proficient Java and Backend Developer.
+          </p>
+          <a href="java_roadmap.html" class="popup-btn btn-primary">View the Roadmap</a>
+      </div>
+  </div>
 
-  <!-- Floating Action Button -->
-  <button class="fab" aria-label="Quick contact" onclick="scrollToContact()">
-    <i class="fas fa-envelope" aria-hidden="true"></i>
-  </button>
 
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
+  
+  <!-- JavaScript for the popup -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const popupOverlay = document.getElementById('roadmap-popup');
+        const popupContainer = popupOverlay.querySelector('.popup-container');
+        const closeIcon = document.getElementById('popup-close-icon');
+
+        // Function to show the popup
+        const showPopup = () => {
+            popupOverlay.classList.add('active');
+        };
+
+        // Function to hide the popup
+        const hidePopup = () => {
+            popupOverlay.classList.remove('active');
+        };
+
+        // Show the popup after a short delay (e.g., 2 seconds)
+        setTimeout(showPopup, 2000);
+
+        // Hide popup when clicking on the overlay (outside the content)
+        popupOverlay.addEventListener('click', (event) => {
+            if (event.target === popupOverlay) {
+                hidePopup();
+            }
+        });
+        
+        // Hide popup when clicking the close icon
+        closeIcon.addEventListener('click', hidePopup);
+
+        // Prevent clicks inside the container from closing the popup
+        popupContainer.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    });
+  </script>
 </body>
 </html>

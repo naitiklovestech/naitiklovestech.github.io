@@ -1,14 +1,14 @@
-# 🌐 Naitik Singhal — Java & Android Developer Portfolio
+# 🌐 Naitik Singhal — Java Backend Developer Portfolio
 
 Welcome to my redesigned personal portfolio — a modern, fully responsive single-page website showcasing my expertise in Java backend development, Spring Boot microservices, and native Android applications.
 
 > "Building robust backend systems and intuitive mobile experiences that scale with your business." — Naitik Singhal ⚙️📱
-
+ex
 ---
 
 ## 🚀 Live Preview
 
-🔗 [View Live Portfolio](https://naitiklovestech.github.io)
+🔗 [View Live Portfolio](https://naitiklovestech.in)
 
 ---
 
